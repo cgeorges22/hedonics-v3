@@ -1,0 +1,9 @@
+#PBS -l nodes=1:ppn=8
+#PBS -l walltime=72:00:00
+#PBS -q una
+#PBS -j oe
+#PBS -M rglick@hamilton.edu
+#PBS -m ea
+
+cd $PBS_O_WORKDIR
+/usr/lib64/mvapich2/bin/mpiexec -np 8 ./queue_sim input.txt
