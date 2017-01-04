@@ -410,7 +410,7 @@ int simulation(int randSeed, int rank) {
       //output main time series to output1 (for first randSeed only) (and before restarts)
       if(round >= startOutput1 && round % outputFrequency == 0){// && randSeed == randSeedStart){  //6/02/09 added totUtility, removed avQual 6/8/09 add nomGDP realGDP gdpdeflator
 		if(debugging){printf("output1 for round %d \n", round + 1);} //8/2/09 
-		string data_to_output =  std::to_string(rank) + " " + std::to_string(randSeed) + " " std::to_string(round) + " " + std::to_string(totOutput) + " " + std::to_string(gdpDeflator)
+		string data_to_output = std::to_string(rank) + " " + std::to_string(randSeed) + " " + std::to_string(round) + " " + std::to_string(totOutput) + " " + std::to_string(gdpDeflator)
 					+ " " + std::to_string(firmNum1) + " " + std::to_string(firmNum2) + " " + std::to_string(totUtility) + " " + std::to_string(totUtilityPL) + " " + std::to_string(totUtilityOH)  + " "
 					+ std::to_string(wageBill) + " " + std::to_string(salaryBill) + " " + std::to_string(totProdLEmployment) + " " + std::to_string(totOHLEmployment) + " " + std::to_string(restarts) 
 					+ " " + std::to_string(numRandD) + " " + std::to_string(numRandD1) + " " + std::to_string(numRandD2) + " " + std::to_string(avgProfit) + " " + std::to_string(avgRecentProfitAboveMedRandD) 
