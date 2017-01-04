@@ -410,11 +410,11 @@ int simulation(int randSeed, int rank) {
       //output main time series to output1 (for first randSeed only) (and before restarts)
       if(round >= startOutput1 && round % outputFrequency == 0){// && randSeed == randSeedStart){  //6/02/09 added totUtility, removed avQual 6/8/09 add nomGDP realGDP gdpdeflator
 		if(debugging){printf("output1 for round %d \n", round + 1);} //8/2/09 
-		string data_to_output =  to_string(rank) + " " + to_string(randSeed) + " " to_string(round) + " " + to_string(totOutput) + " " + to_string(gdpDeflator)
-					+ " " + to_string(firmNum1) + " " + to_string(firmNum2) + " " + to_string(totUtility) + " " + to_string(totUtilityPL) + " " + to_string(totUtilityOH)  + " "
-					+ to_string(wageBill) + " " + to_string(salaryBill) + " " + to_string(totProdLEmployment) + " " + to_string(totOHLEmployment) + " " + to_string(restarts) 
-					+ " " + to_string(numRandD) + " " + to_string(numRandD1) + " " + to_string(numRandD2) + " " + to_string(avgProfit) + " " + to_string(avgRecentProfitAboveMedRandD) 
-					+ " " + to_string(avgRecentProfitBelowMedRandD) +  " " + to_string(avgRecentProfitType1) + " " + to_string(avgRecentProfitType2) + "\n";
+		string data_to_output =  std::to_string(rank) + " " + std::to_string(randSeed) + " " std::to_string(round) + " " + std::to_string(totOutput) + " " + std::to_string(gdpDeflator)
+					+ " " + std::to_string(firmNum1) + " " + std::to_string(firmNum2) + " " + std::to_string(totUtility) + " " + std::to_string(totUtilityPL) + " " + std::to_string(totUtilityOH)  + " "
+					+ std::to_string(wageBill) + " " + std::to_string(salaryBill) + " " + std::to_string(totProdLEmployment) + " " + std::to_string(totOHLEmployment) + " " + std::to_string(restarts) 
+					+ " " + std::to_string(numRandD) + " " + std::to_string(numRandD1) + " " + std::to_string(numRandD2) + " " + std::to_string(avgProfit) + " " + std::to_string(avgRecentProfitAboveMedRandD) 
+					+ " " + std::to_string(avgRecentProfitBelowMedRandD) +  " " + std::to_string(avgRecentProfitType1) + " " + std::to_string(avgRecentProfitType2) + "\n";
 	      	output1 << data_to_output;
       }
       //output sixfirm time series to output3 (for first randSeed only)
