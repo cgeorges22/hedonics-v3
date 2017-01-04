@@ -410,15 +410,12 @@ int simulation(int randSeed, int rank) {
       //output main time series to output1 (for first randSeed only) (and before restarts)
       if(round >= startOutput1 && round % outputFrequency == 0){// && randSeed == randSeedStart){  //6/02/09 added totUtility, removed avQual 6/8/09 add nomGDP realGDP gdpdeflator
 		if(debugging){printf("output1 for round %d \n", round + 1);} //8/2/09 
-		output1 << rank << " " <<randSeed<< " " <<round << " " << totOutput << " " << gdpDeflator << " "
-			//<< nomGDP << " " << realGDP << " "  
-			<< firmNum1 << " " << firmNum2 << " " 
-			<< totUtility << " " << totUtilityPL << " " << totUtilityOH  << " "
-			//<< avTechEff << " " << strtTech << " " 
-			<< wageBill << " " << salaryBill << " " << totProdLEmployment << " " << totOHLEmployment << " "
-			<< restarts << " " << numRandD << " " << numRandD1 << " " << numRandD2 << " "
-			<< avgProfit << " " << avgRecentProfitAboveMedRandD << " " << avgRecentProfitBelowMedRandD <<  " " 
-			<< avgRecentProfitType1 << " " << avgRecentProfitType2 << "\n";
+		string data_to_output =  to_string(rank) + " " + to_string(randSeed) + " " to_string(round) + " " + to_string(totOutput) + " " + to_string(gdpDeflator)
+					+ " " + to_string(firmNum1) + " " + to_string(firmNum2) + " " + to_string(totUtility) + " " + to_string(totUtilityPL) + " " + to_string(totUtilityOH)  + " "
+					+ to_string(wageBill) + " " + to_string(salaryBill) + " " + to_string(totProdLEmployment) + " " + to_string(totOHLEmployment) + " " + to_string(restarts) 
+					+ " " + to_string(numRandD) + " " + to_string(numRandD1) + " " + to_string(numRandD2) + " " + to_string(avgProfit) + " " + to_string(avgRecentProfitAboveMedRandD) 
+					+ " " + to_string(avgRecentProfitBelowMedRandD) +  " " + to_string(avgRecentProfitType1) + " " + to_string(avgRecentProfitType2) + "\n";
+	      	output1 << data_to_output;
       }
       //output sixfirm time series to output3 (for first randSeed only)
       /*
