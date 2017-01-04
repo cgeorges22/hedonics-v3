@@ -38,6 +38,7 @@ $ git push origin master
 // Run the following commands
 
 $ module load mpi/mvapich2-x86_64     // load mpi
+$ make clean
 $ make                                // compile the program
 $ qsub queue_sim                      // add the program to the hpc queue
 
