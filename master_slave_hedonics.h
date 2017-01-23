@@ -416,8 +416,6 @@ int simulation(int randSeed, int rank, MPI_File file) {
 					+ " " + std::to_string(numRandD) + " " + std::to_string(numRandD1) + " " + std::to_string(numRandD2) + " " + std::to_string(avgProfit) + " " + std::to_string(avgRecentProfitAboveMedRandD) 
 					+ " " + std::to_string(avgRecentProfitBelowMedRandD) +  " " + std::to_string(avgRecentProfitType1) + " " + std::to_string(avgRecentProfitType2) + "\n";
 //	      	output1 << data_to_output << endl;
-	
-		cout << endl << "file: " << file << endl << endl;
 
 		// output to data1 file JKR 1/23/17	
 		MPI_Status io_status;
