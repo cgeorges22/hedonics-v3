@@ -1,7 +1,7 @@
-firmNum  1000
+firmNum  10
 rounds  5000
 randSeedStart 1
-randSeedEnd 1000
+randSeedEnd 10
 startOutput1  1
 outputFrequency  10
 printRoundsFrequency  1000

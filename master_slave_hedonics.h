@@ -134,7 +134,7 @@ void getInput();
 string IntToStr(int t); //jagonzal added this function 10/7/16
 
 // Main Function
-int simulation(int randSeed, int rank) {
+int simulation(int randSeed, int rank, MPI_File file) {
 
 
   //Parallelization begins here 10/7/16 
@@ -414,8 +414,15 @@ int simulation(int randSeed, int rank) {
 					+ " " + std::to_string(firmNum1) + " " + std::to_string(firmNum2) + " " + std::to_string(totUtility) + " " + std::to_string(totUtilityPL) + " " + std::to_string(totUtilityOH)  + " "
 					+ std::to_string(wageBill) + " " + std::to_string(salaryBill) + " " + std::to_string(totProdLEmployment) + " " + std::to_string(totOHLEmployment) + " " + std::to_string(restarts) 
 					+ " " + std::to_string(numRandD) + " " + std::to_string(numRandD1) + " " + std::to_string(numRandD2) + " " + std::to_string(avgProfit) + " " + std::to_string(avgRecentProfitAboveMedRandD) 
-					+ " " + std::to_string(avgRecentProfitBelowMedRandD) +  " " + std::to_string(avgRecentProfitType1) + " " + std::to_string(avgRecentProfitType2);
-	      	output1 << data_to_output << endl;
+					+ " " + std::to_string(avgRecentProfitBelowMedRandD) +  " " + std::to_string(avgRecentProfitType1) + " " + std::to_string(avgRecentProfitType2) + "\n";
+//	      	output1 << data_to_output << endl;
+	
+		cout << endl << "file: " << file << endl << endl;
+
+		// output to data1 file JKR 1/23/17	
+		MPI_Status io_status;
+		MPI_File_write_shared(file, data_to_output.c_str(), data_to_output.size(), MPI_CHAR, &io_status);      			
+
       }
       //output sixfirm time series to output3 (for first randSeed only)
       /*

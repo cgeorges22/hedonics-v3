@@ -26,6 +26,7 @@ using namespace std;
 void master(int arg1, int arg2);
 void slave(int rank);
 void getSeeds(int& start, int& end);
+MPI_File file;
 
 int main(int argc, char *argv[]){
   
@@ -38,9 +39,16 @@ int main(int argc, char *argv[]){
   MPI_Init(0, 0);  
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+  MPI_File_open(MPI_COMM_WORLD, "data1.txt", MPI_MODE_WRONLY|MPI_MODE_CREATE, 
+		MPI_INFO_NULL, &file);
+
+  cout << endl << "file: " << file << endl << endl;
  
   if(rank == MASTER) master(start, end);
   else slave(rank);
+
+  MPI_File_close(&file);
  
   MPI_Finalize();
   return 0;
@@ -104,7 +112,7 @@ void slave(int rank){
      if(status.MPI_TAG == DIETAG){
        return;
      }
-     simulation(randSeed, rank);
+     simulation(randSeed, rank, file);
 
      // Send back to Master that simulation is over
      MPI_Send(0,0,MPI_INT,MASTER,NEEDWORK,MPI_COMM_WORLD);
