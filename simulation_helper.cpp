@@ -42,8 +42,6 @@ int main(int argc, char *argv[]){
 
   MPI_File_open(MPI_COMM_WORLD, "data1.txt", MPI_MODE_WRONLY|MPI_MODE_CREATE, 
 		MPI_INFO_NULL, &file);
-
-  cout << endl << "file: " << file << endl << endl;
  
   if(rank == MASTER) master(start, end);
   else slave(rank);
