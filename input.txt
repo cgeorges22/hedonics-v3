@@ -1,4 +1,4 @@
-firmNum  10
+firmNum  5
 rounds  5000
 randSeedStart 1
 randSeedEnd 10
@@ -41,9 +41,12 @@ riGain  0.1
 rpGain  0.2
 intensityOfChoice  0.5
 probRandDInvestMutation  0.01
-testParam  2.0
 weightRandDDC  0.5
 probRandomRestart  0.00
 probSwitchMarkets 0.2
 probRandomSwitchMarkets 0.0
 ownMarketBias 10
+paramName firmNum 
+paramStart 10
+paramStop 20
+paramStep 10

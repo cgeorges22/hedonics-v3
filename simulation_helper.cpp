@@ -23,17 +23,19 @@
 using namespace std;
 
 
-void master(int arg1, int arg2);
+void master(int arg1, int arg2, double paramStart, double paramStop, double paramStep);
 void slave(int rank);
-void getSeeds(int& start, int& end);
+void getSeeds(int& start, int& end, string& paramName, double& paramStart, double& paramStop, double& paramStep);
 MPI_File file;
 
 int main(int argc, char *argv[]){
   
   int size, rank, perJobs;
   int start, end;
+  string paramName;
+  double paramStart, paramStop, paramStep;
 
-  getSeeds(start,end);
+  getSeeds(start, end, paramName, paramStart, paramStop, paramStep);
   //Got the inputs
 
   MPI_Init(0, 0);  
@@ -43,7 +45,7 @@ int main(int argc, char *argv[]){
   MPI_File_open(MPI_COMM_WORLD, "data1.txt", MPI_MODE_WRONLY|MPI_MODE_CREATE, 
 		MPI_INFO_NULL, &file);
  
-  if(rank == MASTER) master(start, end);
+  if(rank == MASTER) master(start, end, paramStart, paramStop, paramStep);
   else slave(rank);
 
   MPI_File_close(&file);
@@ -53,9 +55,10 @@ int main(int argc, char *argv[]){
 
 }
 
-void master(int start, int end){
-  int totalJobs, rank, ntasks;
-  deque<int>globalQueue;
+void master(int start, int end, double paramStart, double paramStop, double paramStep){
+  int totalJobs, rank, ntasks, paramSpace;
+  deque<int>seedQueue;
+  deque<double>paramQueue;
   totalJobs = abs(end-start);
 
   MPI_Status status;
@@ -63,27 +66,38 @@ void master(int start, int end){
  
 
   // Fills the Global Queue
-  int temp = start;                                    
-  for(int i = 0; i <= totalJobs; i++, temp++){
-    globalQueue.push_back(temp); 
+  int seed = start;                                   
+  double param; 
+
+  for(int i = 0; i <= totalJobs; i++, seed++){
+    for (param = paramStart; param <= paramStop; param += paramStep) {
+      seedQueue.push_back(seed); 
+      paramQueue.push_back(param);
+    }
   } 
     
   // Intialize mass seed distribution
   for(rank = 1; rank < ntasks; rank++){
-    if(!globalQueue.empty()){
-      int buffer = globalQueue.front();
-      globalQueue.pop_front();
-      MPI_Send(&buffer, 1, MPI_INT,rank, 1, MPI_COMM_WORLD);
+    if(!seedQueue.empty()){
+      seed = seedQueue.front();
+      seedQueue.pop_front();
+      param = paramQueue.front();
+      paramQueue.pop_front();
+      MPI_Send(&seed, 1, MPI_INT,rank, 1, MPI_COMM_WORLD);
+      MPI_Send(&param, 1, MPI_DOUBLE,rank, 1, MPI_COMM_WORLD); 
     }
   }
 
   // If there are more seeds than processors, continue to distribute
-  while(!globalQueue.empty()){ 
-    int buffer = globalQueue.front();
-    globalQueue.pop_front();
+  while(!seedQueue.empty()){ 
+    seed = seedQueue.front();
+    seedQueue.pop_front();
+    param = paramQueue.front();
+    paramQueue.pop_front();
     MPI_Recv(0, 0, MPI_INT, MPI_ANY_SOURCE, NEEDWORK,MPI_COMM_WORLD,&status);
 
-    MPI_Send(&buffer, 1, MPI_INT, status.MPI_SOURCE, WORKTAG, MPI_COMM_WORLD); 
+    MPI_Send(&seed, 1, MPI_INT, status.MPI_SOURCE, WORKTAG, MPI_COMM_WORLD); 
+    MPI_Send(&param, 1, MPI_DOUBLE, status.MPI_SOURCE, WORKTAG, MPI_COMM_WORLD); 
   }
 
   // Kill all other processors once all simulations are over
@@ -99,18 +113,20 @@ void master(int start, int end){
 
 void slave(int rank){
 
-   int randSeed;
+   int seed;
+   double param;
    MPI_Status status;
 
    for(;;){
 
      // Receive RandSeed for simulation
-     MPI_Recv(&randSeed,1,MPI_INT,MASTER,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
-      
+     MPI_Recv(&seed,1,MPI_INT,MASTER,MPI_ANY_TAG,MPI_COMM_WORLD,&status); 
+     MPI_Recv(&param,1,MPI_DOUBLE,MASTER,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
+
      if(status.MPI_TAG == DIETAG){
        return;
      }
-     simulation(randSeed, rank, file);
+     simulation(seed, rank, file, param);
 
      // Send back to Master that simulation is over
      MPI_Send(0,0,MPI_INT,MASTER,NEEDWORK,MPI_COMM_WORLD);
@@ -118,7 +134,7 @@ void slave(int rank){
 }
 
 
-void getSeeds(int& start, int& end){
+void getSeeds(int& start, int& end, string& paramName, double& paramStart, double& paramStop, double& paramStep){
   char line[256];
   char* variable;
   char* value;
@@ -131,13 +147,38 @@ void getSeeds(int& start, int& end){
   input.getline(line, 256);
   variable = strtok(line, " ");
 
+  // get randSeedStart
   while (strcmp(variable, "randSeedStart")) {
     input.getline(line, 256);
     variable = strtok(line, " ");
   }
   start = atoi(strtok(NULL, " "));
+
+  // get randSeedEnd
   input.getline(line, 256);
   strtok(line, " ");
   end = atoi(strtok(NULL, " ")); 
+
+  // get paramName
+  while (strcmp(variable, "paramName")) {
+    input.getline(line, 256);
+    variable = strtok(line, " ");
+  }
+  paramName = strtok(NULL, " ");
+
+  // get paramStart
+  input.getline(line, 256);
+  strtok(line, " ");
+  paramStart = atof(strtok(NULL, " ")); 
+
+  // get paramStop
+  input.getline(line, 256);
+  strtok(line, " ");
+  paramStop = atof(strtok(NULL, " ")); 
+
+  // get paramStep
+  input.getline(line, 256);
+  strtok(line, " ");
+  paramStep = atof(strtok(NULL, " ")); 
 }
 

@@ -124,17 +124,17 @@ double avgRecentProfitType2;
 double probSwitchMarkets; //5/29/16 at restart to higher profit market
 double probRandomSwitchMarkets; //6/8/16 plus some purely random to keep n1 n2 from getting stuck at zero
 int ownMarketBias; //6/10/16 //immitation - number of search trials to try to find firm to imitate in own market at restart
-double testParam; //5/29/16
+//double testParam; //5/29/16
 int randSeedStart; //8/10/16
 int randSeedEnd; //8/10/16
+string paramName;
+double paramStart, paramStop, paramStep; // 1/24/17 
 
-
-
-void getInput();
+void getInput(double paramValue);
 string IntToStr(int t); //jagonzal added this function 10/7/16
 
 // Main Function
-int simulation(int randSeed, int rank, MPI_File file) {
+int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
 
 
   //Parallelization begins here 10/7/16 
@@ -170,9 +170,8 @@ int simulation(int randSeed, int rank, MPI_File file) {
 
 
   //initialization
-  getInput(); // ints and reals from input.txt -- set bools below here
+  getInput(paramValue); // ints and reals from input.txt -- set bools below here
   
- 
   double* mean = new double[randSeedEnd - randSeedStart + 1]; //12/5/16 JKR
   double* vol = new double[randSeedEnd - randSeedStart + 1]; //12/5/16 JKR
   
@@ -236,10 +235,11 @@ int simulation(int randSeed, int rank, MPI_File file) {
     	printf("intensity of choics is %f \n", intensityOfChoice); //7-12-15
     	printf("weightRandDDC is %f \n", weightRandDDC); //5/28/16
     	printf("endConsumerSearch is %d \n", endConsumerSearch); //5/28/16
-    	printf("testParam is %f \n", testParam); //5/28/16
+//    	printf("testParam is %f \n", testParam); //5/28/16
 	printf("probRandDInvestMutation is %f \n", probRandDInvestMutation); //5/28/16
 	printf("probSwitchMarkets to higher profit market at restart is %f \n", probSwitchMarkets); //5/29/16
 	printf("probRandomSwitchMarkets at restart is %f \n", probRandomSwitchMarkets); //6/8/16
+//    	printf("paramName is %s \n", paramName.c_str()); //1/24/17
 //	}
 	
     //testoutput << "number of rounds is " << rounds << "\n";
@@ -410,11 +410,12 @@ int simulation(int randSeed, int rank, MPI_File file) {
       //output main time series to output1 (for first randSeed only) (and before restarts)
       if(round >= startOutput1 && round % outputFrequency == 0){// && randSeed == randSeedStart){  //6/02/09 added totUtility, removed avQual 6/8/09 add nomGDP realGDP gdpdeflator
 		if(debugging){printf("output1 for round %d \n", round + 1);} //8/2/09 
-		string data_to_output = std::to_string(rank) + " " + std::to_string(randSeed) + " " + std::to_string(round) + " " + std::to_string(totOutput) + " " + std::to_string(gdpDeflator)
-					+ " " + std::to_string(firmNum1) + " " + std::to_string(firmNum2) + " " + std::to_string(totUtility) + " " + std::to_string(totUtilityPL) + " " + std::to_string(totUtilityOH)  + " "
-					+ std::to_string(wageBill) + " " + std::to_string(salaryBill) + " " + std::to_string(totProdLEmployment) + " " + std::to_string(totOHLEmployment) + " " + std::to_string(restarts) 
-					+ " " + std::to_string(numRandD) + " " + std::to_string(numRandD1) + " " + std::to_string(numRandD2) + " " + std::to_string(avgProfit) + " " + std::to_string(avgRecentProfitAboveMedRandD) 
-					+ " " + std::to_string(avgRecentProfitBelowMedRandD) +  " " + std::to_string(avgRecentProfitType1) + " " + std::to_string(avgRecentProfitType2) + "\n";
+		string data_to_output = to_string(rank) + " " + to_string(randSeed) + " " + to_string(round) + " " + to_string(paramValue) + " " + to_string(totOutput) 
+					+ " " + to_string(gdpDeflator) + " " + to_string(firmNum1) + " " + to_string(firmNum2) + " " + to_string(totUtility) + " " 
+					+ to_string(totUtilityPL) + " " + to_string(totUtilityOH)  + " " + to_string(wageBill) + " " + to_string(salaryBill) + " " 
+					+ to_string(totProdLEmployment) + " " + to_string(totOHLEmployment) + " " + to_string(restarts) + " " + to_string(numRandD) 
+					+ " " + to_string(numRandD1) + " " + to_string(numRandD2) + " " + to_string(avgProfit) + " " + to_string(avgRecentProfitAboveMedRandD) 
+					+ " " + to_string(avgRecentProfitBelowMedRandD) +  " " + to_string(avgRecentProfitType1) + " " + to_string(avgRecentProfitType2) + "\n";
 //	      	output1 << data_to_output << endl;
 
 		// output to data1 file JKR 1/23/17	
@@ -537,27 +538,8 @@ int simulation(int randSeed, int rank, MPI_File file) {
 
 void toBool(bool & var, char * val);
 
-void getInput() {
-  // Strings to store line by line, variable name, start, and final value
-  char line[256];
-  char* variable;
-  char* value;
-  
-  // Uses the file "input.txt"
-  std::fstream input;
-  input.open("input.txt", std::fstream::in);
-  
-  // Go through the input file line by line, tokenize the line into three strings
-  input.getline(line,256);
-  while (strcmp(line, "") != 0) {
-    
-    variable = strtok(line, " ");
-    // start = strtok(NULL, " ");
-    value = strtok(NULL, " ");
-    
-    // cout << variable << " " << start << " " << last << endl;
-    // outfile <<  variable << " " << start << " " << last << endl;
-    
+void set_var(char* variable, char const* value) {
+ 
     // Find and set the given variable
     
      if (strcmp(variable, "probEffShock") == 0) {
@@ -724,17 +706,53 @@ void getInput() {
      else if (strcmp(variable, "ownMarketBias") == 0) {
          ownMarketBias = atoi(value);
      }
-     else if (strcmp(variable, "testParam") == 0) {
-         testParam = atof(value);
-     }
-     
+
     else {
       std::cout << "Variable name: " << variable << " not recognized. No value set." << std::endl;
     }  		
+
+}
+
+void getInput(double paramValue) {
+  // Strings to store line by line, variable name, start, and final value
+  char line[256];
+  char* variable;
+  char* value;
+  
+  // Uses the file "input.txt"
+  std::fstream input;
+  input.open("input.txt", std::fstream::in);
+  
+  // Go through the input file line by line, tokenize the line into three strings
+  input.getline(line,256);
+  while (strcmp(line, "") != 0) {
+    
+    variable = strtok(line, " ");
+    // start = strtok(NULL, " ");
+    value = strtok(NULL, " ");
+    
+    // cout << variable << " " << start << " " << last << endl;
+    // outfile <<  variable << " " << start << " " << last << endl;
+ 
+    if (strcmp(variable, "paramName") == 0) {
+        string paramString = to_string(paramValue);
+	if (paramString != "0") {
+	    set_var(value, paramString.c_str());
+        }
+    }
+
+    
+    else if ((strcmp(variable, "paramStart") != 0) 
+	     && (strcmp(variable, "paramStop") != 0)
+             && (strcmp(variable, "paramStep") != 0)) {
+	set_var(variable, value);
+    }
+
     input.getline(line, 256);
   }
   input.close();
 }
+
 
 void toBool(bool & var, char * val) {
   if (strcmp(val, "true") == 0)
