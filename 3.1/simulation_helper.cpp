@@ -103,7 +103,9 @@ void master(int start, int end, double paramStart, double paramStop, double para
   // Kill all other processors once all simulations are over
   for(rank = 1; rank < ntasks; rank++ ){
     MPI_Send(0,0,MPI_INT, rank, DIETAG, MPI_COMM_WORLD);
+    MPI_Send(0,0,MPI_DOUBLE, rank, DIETAG, MPI_COMM_WORLD);
   } 
+
 
   
     

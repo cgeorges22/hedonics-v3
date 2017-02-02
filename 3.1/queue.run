@@ -1,5 +1,5 @@
 #PBS -l nodes=3:ppn=8
-#PBS -l walltime=00:10:00
+#PBS -l walltime=01:00:00
 #PBS -q una
 #PBS -j oe
 #PBS -M kfuzesi@hamilton.edu
