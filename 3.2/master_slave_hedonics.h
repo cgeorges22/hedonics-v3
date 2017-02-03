@@ -155,8 +155,6 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
   std::ofstream output5("data5.txt",ios_base::app);	//output mean and volatility of Yc for each randSeed //7/6/09	
   std::ofstream testoutput("test.txt",ios_base::app);	//track firm 6 if anotation switch is on
   
-
-
   //for looping over random seeds
   
   //more declarations
@@ -412,7 +410,7 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
       //output main time series to output1 (for first randSeed only) (and before restarts)
       if(round >= startOutput1 && round % outputFrequency == 0){// && randSeed == randSeedStart){  //6/02/09 added totUtility, removed avQual 6/8/09 add nomGDP realGDP gdpdeflator
 		if(debugging){printf("output1 for round %d \n", round + 1);} //8/2/09 
-		string data_to_output = to_string(rank) + " " + to_string(randSeed) + " " + to_string(round) + " " + to_string(paramValue) + " " + to_string(totOutput) 
+		string data_to_output = to_string(rank) + " " + to_string(randSeed) + " " + to_string(round) + " " + to_string(totOutput) 
 					+ " " + to_string(gdpDeflator) + " " + to_string(firmNum1) + " " + to_string(firmNum2) + " " + to_string(totUtility) + " " 
 					+ to_string(totUtilityPL) + " " + to_string(totUtilityOH)  + " " + to_string(wageBill) + " " + to_string(salaryBill) + " " 
 					+ to_string(totProdLEmployment) + " " + to_string(totOHLEmployment) + " " + to_string(restarts) + " " + to_string(numRandD) 
@@ -422,6 +420,7 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
 
 		// output to data1 file JKR 1/23/17	
 		MPI_Status io_status;
+		cout << file << endl;
 		MPI_File_write_shared(file, data_to_output.c_str(), data_to_output.size(), MPI_CHAR, &io_status);      			
 
       }
@@ -746,7 +745,7 @@ void getInput(double paramValue) {
     
     else if ((strcmp(variable, "paramStart") != 0) 
 	     && (strcmp(variable, "paramStop") != 0)
-             && (strcmp(variable, "paramStep") != 0)) {
+             && (strcmp(variable, "paramNum") != 0)) {
 	set_var(variable, value);
     }
 

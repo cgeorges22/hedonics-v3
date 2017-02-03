@@ -1,15 +1,16 @@
 //  Hedonics
-//	v2.10 CG			June 2016	experiments with single changes in params such as eta during run
-//	v2.9 CG				June 2016	allow bias toward own market for immiation at restart
-//	v2.8 CG				May 2016	migration of firms across markets
-//	v2.7 CG				May 2016	R&D by market as well as avg R&D performance
-//	v2.6 CG				May 2016	track profit by market, markup in input.txt
-//	v2.5 CG				May 2016	segment consumers and firms into two markets by class
-//	v2.4 CG 			May 2016	account for wageBill, salaryBill, and production and OH labor separately
-//  v2.3 CG				May 2016 	break out OH labor and salary -- prelim to two classes of consumer and firm
-//	v2.2 CG				April 2016	add profit accounting recording
-//	v2.1 CG				Nov 2015	adjust quality updating
-//  v2.0 CG				Oct 2015	is v1.9 with bools removed from input.txt -- will work on all platforms (hpc, mac, gambs2)
+//  v3.0 JKR		Dec 2016	added parallelization to increase simulation speed    
+//	v2.10 CG	June 2016	experiments with single changes in params such as eta during run
+//	v2.9 CG		June 2016	allow bias toward own market for immiation at restart
+//	v2.8 CG		May 2016	migration of firms across markets
+//	v2.7 CG		May 2016	R&D by market as well as avg R&D performance
+//	v2.6 CG		May 2016	track profit by market, markup in input.txt
+//	v2.5 CG		May 2016	segment consumers and firms into two markets by class
+//	v2.4 CG 	May 2016	account for wageBill, salaryBill, and production and OH labor separately
+//  v2.3 CG		May 2016 	break out OH labor and salary -- prelim to two classes of consumer and firm
+//	v2.2 CG		April 2016	add profit accounting recording
+//	v2.1 CG		Nov 2015	adjust quality updating
+//  v2.0 CG		Oct 2015	is v1.9 with bools removed from input.txt -- will work on all platforms (hpc, mac, gambs2)
 //  v1.9 Philip Ewing	June 2015   break out parameter values to input.txt file
 //       Chris Georges              two versions -- this one for mac and hpc, other for gambs2
 //  v1.8 Chris Georges  June 2011   multiplicative quality increments 
