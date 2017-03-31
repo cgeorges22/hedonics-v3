@@ -33,24 +33,22 @@ void closeFiles(int paramNum);
 
 int main(int argc, char *argv[]){
   
-  int size, rank, perJobs;
-  int start, end;
+  int ntasks, rank, seedStart, seedEnd, paramNum;
   string paramName;
   double paramStart, paramStop;
-  int paramNum;
 
-  getSeeds(start, end, paramName, paramStart, paramStop, paramNum);
+  getSeeds(seedStart, seedEnd, paramName, paramStart, paramStop, paramNum);
   //Got the inputs
 
   MPI_Init(0, 0);  
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  MPI_Comm_size(MPI_COMM_WORLD, &size);
+  MPI_Comm_size(MPI_COMM_WORLD, &ntasks);
 
   // open the files - must be done by all procesoors synchronously
   files = new MPI_File [paramNum];
   openFiles(paramStart, paramStop, paramNum);
 
-  if(rank == MASTER) master(start, end, paramStart, paramStop, paramNum);
+  if(rank == MASTER) master(seedStart, seedEnd, paramStart, paramStop, paramNum);
   else slave(rank);
 
   closeFiles(paramNum); 
@@ -60,22 +58,25 @@ int main(int argc, char *argv[]){
 
 }
 
-void master(int start, int end, double paramStart, double paramStop, int paramNum){
-  int totalJobs, rank, ntasks, paramSpace;
+void master(int seedStart, int seedEnd, double paramStart, double paramStop, int paramNum){
+
+  int totalSeeds, rank, ntasks, totalJobs;
   deque<int>seedQueue;
   deque<double>paramQueue;
-  totalJobs = abs(end-start);
+
+  totalSeeds = abs(seedEnd-seedStart);
+  totalJobs = totalSeeds * paramNum;
 
   MPI_Status status;
   MPI_Comm_size(MPI_COMM_WORLD, &ntasks);
  
 
   // Fills the Global Queue
-  int seed = start;                                   
+  int seed = seedStart;                                   
   double param; 
   double step = (paramStop - paramStart)/(paramNum - 1);
 
-  for(int i = 0; i <= totalJobs; i++, seed++){
+  for(int i = 0; i <= totalSeeds; i++, seed++){
     param = paramStart;
     for (int j = 0; j < paramNum; j++, param += step) {
       seedQueue.push_back(seed); 
@@ -132,7 +133,7 @@ void master(int start, int end, double paramStart, double paramStop, int paramNu
   
     
    return;
-  } //end of master function
+} //end of master function
 
 
 void slave(int rank){
