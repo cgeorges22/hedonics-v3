@@ -25,19 +25,21 @@ using namespace std;
 
 void master(int arg1, int arg2, double paramStart, double paramStop, int paramNum);
 void slave(int rank);
-void getSeeds(int& start, int& end, string& paramName, double& paramStart, double& paramStop, int& paramNum);
+void getSeeds(int& start, int& end, string& paramName, double& paramStart, 
+	      double& paramStop, int& paramNum, int& experiment);
 //MPI_File file;
 MPI_File * files; 
-void openFiles(double paramStart, double paramStop, int paramNum, string paramName);
+void openFiles(double paramStart, double paramStop, int paramNum, string paramName,
+	       int experiment);
 void closeFiles(int paramNum);
 
 int main(int argc, char *argv[]){
   
-  int ntasks, rank, seedStart, seedEnd, paramNum;
+  int ntasks, rank, seedStart, seedEnd, paramNum, experiment;
   string paramName;
   double paramStart, paramStop;
 
-  getSeeds(seedStart, seedEnd, paramName, paramStart, paramStop, paramNum);
+  getSeeds(seedStart, seedEnd, paramName, paramStart, paramStop, paramNum, experiment);
   //Got the inputs
 
   MPI_Init(0, 0);  
@@ -46,7 +48,7 @@ int main(int argc, char *argv[]){
 
   // open the files - must be done by all procesoors synchronously
   files = new MPI_File [paramNum];
-  openFiles(paramStart, paramStop, paramNum, paramName);
+  openFiles(paramStart, paramStop, paramNum, paramName, experiment);
 
   if(rank == MASTER) master(seedStart, seedEnd, paramStart, paramStop, paramNum);
   else slave(rank);
@@ -174,9 +176,11 @@ void slave(int rank){
 }
 
 
-void getSeeds(int& start, int& end, string& paramName, double& paramStart, double& paramStop, int& paramNum){
+void getSeeds(int& start, int& end, string& paramName, double& paramStart, 
+	      double& paramStop, int& paramNum, int&experiment){
   char line[256];
   char* variable;
+
   // Uses the file "input.txt"
   std::fstream input;
   input.open("input.txt", std::fstream::in);
@@ -185,6 +189,7 @@ void getSeeds(int& start, int& end, string& paramName, double& paramStart, doubl
   // Taken from hedonics-v2.10
   input.getline(line, 256);
   variable = strtok(line, " ");
+
 
   // get randSeedStart
   while (strcmp(variable, "randSeedStart")) {
@@ -219,9 +224,22 @@ void getSeeds(int& start, int& end, string& paramName, double& paramStart, doubl
   input.getline(line, 256);
   strtok(line, " ");
   paramNum = atoi(strtok(NULL, " ")); 
+
+  // experiment num
+  input.getline(line, 256);
+  strtok(line, " ");
+  experiment = atoi(strtok(NULL, " ")); 
+  string strNext = to_string(experiment+1) + "\n";
+  int length = input.tellg();
+  int numStart = length - (1+to_string(experiment).length());
+  input.seekg(numStart);
+  input.write(strNext.c_str(), strNext.length());
+  input.seekg(length);
+
 }
 
-void openFiles(double paramStart, double paramStop, int paramNum, string paramName) {
+void openFiles(double paramStart, double paramStop, int paramNum, string paramName,
+	       int experiment) {
  
   double step, param;
 
@@ -238,7 +256,7 @@ void openFiles(double paramStart, double paramStop, int paramNum, string paramNa
   for (int i = 0; i < paramNum; i++, param += step){
     
     MPI_File file;
-    string file_name = "data1-" + to_string(param) + ".txt";
+    string file_name = to_string(experiment) + "-data1-" + to_string(param) + ".txt";
   
     MPI_File_open(MPI_COMM_WORLD, file_name.c_str(), MPI_MODE_WRONLY|MPI_MODE_CREATE, 
 		MPI_INFO_NULL, &file);

@@ -1,3 +1,4 @@
+experiment 1
 firmNum  5
 rounds  5000
 randSeedStart 1

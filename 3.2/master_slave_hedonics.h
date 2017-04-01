@@ -746,7 +746,8 @@ void getInput(double paramValue) {
     
     else if ((strcmp(variable, "paramStart") != 0) 
 	     && (strcmp(variable, "paramStop") != 0)
-             && (strcmp(variable, "paramNum") != 0)) {
+             && (strcmp(variable, "paramNum") != 0)
+	     && (strcmp(variable, "experiment") != 0)) {
 	set_var(variable, value);
     }
 
