@@ -46,6 +46,18 @@ probRandomRestart  0.00
 probSwitchMarkets 0.2
 probRandomSwitchMarkets 0.0
 ownMarketBias 10
+cesHedonics = true
+discChoice = true
+endogInnovation = true
+imitation = true
+multiplicativeMutation = true
+intermediateGoods = false
+altPriceIndex = false
+commonShocks = false
+anotation = false
+debugging = false
+twoClasses = true
+endogN1N2 = true
 paramName firmNum 
 paramStart 10
 paramStop 20

@@ -1,40 +1,41 @@
 //  Hedonics
+//  v3.2 Kat Fuzesi	Jan 2017	exploring parameter space exports to multiple files
+//  					NOTE: if not used, set paramName = 0 in input file
 //  v3.1 Kat Fuzesi	Jan 2017	added option to explore the parameter space 
 //  v3.0 JKR            Dec 2016        added parallelization to increase simulation speed    
-//	v2.10 CG	June 2016	experiments with single changes in params such as eta during run
-//	v2.9 CG		June 2016	allow bias toward own market for immiation at restart
-//	v2.8 CG		May 2016	migration of firms across markets
-//	v2.7 CG		May 2016	R&D by market as well as avg R&D performance
-//	v2.6 CG		May 2016	track profit by market, markup in input.txt
-//	v2.5 CG		May 2016	segment consumers and firms into two markets by class
-//	v2.4 CG 	May 2016	account for wageBill, salaryBill, and production and OH labor separately
+//  v2.10 CG		June 2016	experiments with single changes in params such as eta during run
+//  v2.9 CG		June 2016	allow bias toward own market for immiation at restart
+//  v2.8 CG		May 2016	migration of firms across markets
+//  v2.7 CG		May 2016	R&D by market as well as avg R&D performance
+//  v2.6 CG		May 2016	track profit by market, markup in input.txt
+//  v2.5 CG		May 2016	segment consumers and firms into two markets by class
+//  v2.4 CG 		May 2016	account for wageBill, salaryBill, and production and OH labor separately
 //  v2.3 CG		May 2016 	break out OH labor and salary -- prelim to two classes of consumer and firm
-//	v2.2 CG		April 2016	add profit accounting recording
-//	v2.1 CG		Nov 2015	adjust quality updating
+//  v2.2 CG		April 2016	add profit accounting recording
+//  v2.1 CG		Nov 2015	adjust quality updating
 //  v2.0 CG		Oct 2015	is v1.9 with bools removed from input.txt -- will work on all platforms (hpc, mac, gambs2)
-//  v1.9 Philip Ewing	June 2015   break out parameter values to input.txt file
-//       Chris Georges              two versions -- this one for mac and hpc, other for gambs2
-//  v1.8 Chris Georges  June 2011   multiplicative quality increments 
-//  v1.7 Chris Georges  Oct 2010    adds labor overhead, can suppress intermed goods
-//                                  restart accounting fixed 6-3-11
-//  v1.6 Chris Georges  July 2010   adds quasi discrete choice option for R&D choice 
-//  v1.6 Chris Georges  March 2010  adds endogenous innovation -- adoption of R&D with labor cost
+//  v1.9 Philip Ewing	June 2015   	break out parameter values to input.txt file
+//       Chris Georges              	two versions -- this one for mac and hpc, other for gambs2
+//  v1.8 Chris Georges  June 2011   	multiplicative quality increments 
+//  v1.7 Chris Georges  Oct 2010    	adds labor overhead, can suppress intermed goods
+//                                  	restart accounting fixed 6-3-11
+//  v1.6 Chris Georges  July 2010   	adds quasi discrete choice option for R&D choice 
+//  v1.6 Chris Georges  March 2010  	adds endogenous innovation -- adoption of R&D with labor cost
 //  v1.5 Chris Georges  July 2009	adds loop over random seed and calculates means and variances of output
-//                                  and corrects memory leak in consumer search aug 2 2009
+//                                  	and corrects memory leak in consumer search aug 2 2009
 //  v1.4 Chris Georges  June 2009 	adds complementarities
 //  v1.3 Chris Georges  June 2009 	adds indivisibilities
-//  v1.2 Chris Georges  June 2009   add quality and inflation adjusted output to v1.1    
-//  v1.1 Chris Georges  Dec 2008    fixes product shares in v1.0
+//  v1.2 Chris Georges  June 2009   	add quality and inflation adjusted output to v1.1    
+//  v1.1 Chris Georges  Dec 2008    	fixes product shares in v1.0
 //  v1.0 Chris Georges  July 2008	alters CES Firm Dynamics model: firms1 devc++ v2.6 (see history below)
-//	   purpose is to add hedonic product characterization and explicit 
-//         model of product innovation
+//	   				purpose is to add hedonic product characterization and explicit 
+//         				model of product innovation
 
 //  Firm Dynamics
 //  v2.6 Chris Georges Jan 2008 
 //  v2.0 Chris Georges March 2007
 //  v1.0 Dane Johnson  Dec 2006
 	
-   
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -160,7 +161,7 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
   //more declarations
   
   int i,j, round, restarts;
-  double totOutput, totUtility, totUtilityPL, totUtilityOH, lastOutput, secs, mutScale, totProdLEmployment, totOHLEmployment;
+  double totOutput, totUtility, totUtilityPL, totUtilityOH, lastOutput = 0, secs, mutScale, totProdLEmployment, totOHLEmployment;
   bool commonShocks, imitation, anotation, altPriceIndex, cesHedonics, debugging;
   bool endogInnovation, discChoice, intermediateGoods, multiplicativeMutation;
   bool twoClasses; //5/12/16 alow two consumer/firm classes/submarkets
@@ -383,7 +384,7 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
 	  totProdLEmployment = wageBill/wage; //5/13/16
 	  totOHLEmployment = salaryBill/salary; //5/13/16
 	  if(round == 1000) {
-		printf("total output and R&D are %f and %f \n", totOutput, numRandD);
+		printf("total output and R&D are %f and %d \n", totOutput, numRandD);
 		printf("total employment of production labor and OH labor are %f and %f \n", totProdLEmployment , totOHLEmployment);
      	printf("total wageBill and salaryBill are %f and %f \n", wageBill, salaryBill);
      	printf("total Utility of PL and OHL are %f and %f \n", totUtilityPL, totUtilityOH);
@@ -420,7 +421,7 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
 
 		// output to data1 file JKR 1/23/17	
 		MPI_Status io_status;
-		cout << file << endl;
+		//cout << file << endl;
 		MPI_File_write_shared(file, data_to_output.c_str(), data_to_output.size(), MPI_CHAR, &io_status);      			
 
       }
