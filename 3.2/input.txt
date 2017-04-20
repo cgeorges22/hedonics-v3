@@ -49,4 +49,4 @@ ownMarketBias 10
 paramName firmNum 
 paramStart 10
 paramStop 20
-paramNum 3
+paramNum 2

@@ -32,22 +32,30 @@ void openFiles(double paramStart, double paramStop, int paramNum, string paramNa
 void closeFiles(int paramNum);
 
 int main(int argc, char *argv[]){
-  
-  int ntasks, rank, seedStart, seedEnd, paramNum;
-  string paramName;
-  double paramStart, paramStop;
 
-  getSeeds(seedStart, seedEnd, paramName, paramStart, paramStop, paramNum);
-  //Got the inputs
+  int ntasks, rank;
 
   MPI_Init(0, 0);  
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &ntasks);
 
+  cout << endl << "BEGINNING!!  " << rank << endl;
+
+  int seedStart, seedEnd, paramNum;
+  string paramName;
+  double paramStart, paramStop;
+
+  getSeeds(seedStart, seedEnd, paramName, paramStart, paramStop, paramNum);
+  //Got the inputs
+  
+  cout << "GOT INPUTS  " << rank << endl;
+
   // open the files - must be done by all procesoors synchronously
   files = new MPI_File [paramNum];
   openFiles(paramStart, paramStop, paramNum, paramName);
 
+  cout << "OPENED FILES  " << rank << endl;
+  
   if(rank == MASTER) master(seedStart, seedEnd, paramStart, paramStop, paramNum);
   else slave(rank);
 
@@ -60,7 +68,7 @@ int main(int argc, char *argv[]){
 
 void master(int seedStart, int seedEnd, double paramStart, double paramStop, int paramNum){
 
-  int totalSeeds, rank, ntasks, totalJobs, extra;
+  int totalSeeds, rank, ntasks, totalJobs, counter = 0;
   deque<int>seedQueue;
   deque<double>paramQueue;
 
@@ -70,9 +78,12 @@ void master(int seedStart, int seedEnd, double paramStart, double paramStop, int
   MPI_Status status;
   MPI_Comm_size(MPI_COMM_WORLD, &ntasks);
  
-  extra = ntasks - (totalJobs % ntasks);
-  
-// Fills the Global Queue
+  //extra = totalJobs - ntasks - 1;
+  //cout << "EXTRA: " << extra << endl; 
+  //cout << "TOTAL JOBS: " << totalJobs << endl;
+  //cout << "PARAM NUM: " << paramNum << endl;
+
+  // Fills the Global Queue
   int seed = seedStart;                                   
   double param; 
   double step = (paramStop - paramStart)/(paramNum - 1);
@@ -100,17 +111,20 @@ void master(int seedStart, int seedEnd, double paramStart, double paramStop, int
       param = paramQueue.front();
       paramQueue.pop_front();
    
+      cout << "COUNT: " << counter++ << endl;;
+
       MPI_Send(&seed, 1, MPI_INT,rank, 1, MPI_COMM_WORLD);
       MPI_Send(&fileNum, 1, MPI_INT,rank, 1, MPI_COMM_WORLD);
       MPI_Send(&param, 1, MPI_DOUBLE,rank, 1, MPI_COMM_WORLD); 
     }
   }
 
+  bool extra = false;
+
   // If there are more seeds than processors, continue to distribute
-  bool moreSeeds = false;
   while(!seedQueue.empty()){
-    moreSeeds = true;
- 
+    extra = true;
+
     seed = seedQueue.front();
     seedQueue.pop_front();
 
@@ -120,18 +134,24 @@ void master(int seedStart, int seedEnd, double paramStart, double paramStop, int
     param = paramQueue.front();
     paramQueue.pop_front();
    
+    cout <<  "COUNT: " << counter-- << endl;;
+    
     MPI_Recv(0, 0, MPI_INT, MPI_ANY_SOURCE, NEEDWORK,MPI_COMM_WORLD,&status);
+
+    cout <<  "COUNT: " << counter++ << endl;;
 
     MPI_Send(&seed, 1, MPI_INT, status.MPI_SOURCE, WORKTAG, MPI_COMM_WORLD); 
     MPI_Send(&fileNum, 1, MPI_INT,status.MPI_SOURCE, WORKTAG, MPI_COMM_WORLD);
     MPI_Send(&param, 1, MPI_DOUBLE, status.MPI_SOURCE, WORKTAG, MPI_COMM_WORLD); 
   }
 
-  if (moreSeeds){
-    for (int i = 0; i < extra; i++){
+  if (extra)
+    for (int i = 1; i < ntasks; i++){
+      cout << "COUNT: " <<  counter-- << endl;;
       MPI_Recv(0, 0, MPI_INT, MPI_ANY_SOURCE, NEEDWORK,MPI_COMM_WORLD,&status);
     }
-  }
+
+  cout << "kill all processors" << endl;
 
   // Kill all other processors once all simulations are over
   for(rank = 1; rank < ntasks; rank++ ){
@@ -180,12 +200,16 @@ void getSeeds(int& start, int& end, string& paramName, double& paramStart, doubl
   // Uses the file "input.txt"
   std::fstream input;
   input.open("input.txt", std::fstream::in);
-  
+ 
+  cout << "A" << endl;
+ 
   // Go through the input file line by line, tokenize the line into three strings
   // Taken from hedonics-v2.10
   input.getline(line, 256);
   variable = strtok(line, " ");
 
+  cout << "B" << endl;
+ 
   // get randSeedStart
   while (strcmp(variable, "randSeedStart")) {
     input.getline(line, 256);
@@ -193,10 +217,14 @@ void getSeeds(int& start, int& end, string& paramName, double& paramStart, doubl
   }
   start = atoi(strtok(NULL, " "));
 
+  cout << "C" << endl;
+
   // get randSeedEnd
   input.getline(line, 256);
   strtok(line, " ");
   end = atoi(strtok(NULL, " ")); 
+
+  cout << "D" << endl;
 
   // get paramName
   while (strcmp(variable, "paramName")) {
@@ -205,20 +233,30 @@ void getSeeds(int& start, int& end, string& paramName, double& paramStart, doubl
   }
   paramName = strtok(NULL, " ");
 
+  cout << "E" << endl;
+
   // get paramStart
   input.getline(line, 256);
   strtok(line, " ");
   paramStart = atof(strtok(NULL, " ")); 
+
+  cout << "F" << endl;
 
   // get paramStop
   input.getline(line, 256);
   strtok(line, " ");
   paramStop = atof(strtok(NULL, " ")); 
 
+  cout << "G" << endl;
+
   // get paramNum
   input.getline(line, 256);
   strtok(line, " ");
   paramNum = atoi(strtok(NULL, " ")); 
+
+  cout << "H" << endl;
+
+  input.close();
 }
 
 void openFiles(double paramStart, double paramStop, int paramNum, string paramName) {
@@ -239,7 +277,7 @@ void openFiles(double paramStart, double paramStop, int paramNum, string paramNa
     
     MPI_File file;
     string file_name = "data1-" + to_string(param) + ".txt";
-  
+
     MPI_File_open(MPI_COMM_WORLD, file_name.c_str(), MPI_MODE_WRONLY|MPI_MODE_CREATE, 
 		MPI_INFO_NULL, &file);
 
