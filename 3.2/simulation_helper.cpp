@@ -23,7 +23,7 @@
 using namespace std;
 
 
-void master(int arg1, int arg2, double paramStart, double paramStop, int paramNum);
+void master(int arg1, int arg2, double paramStart, double paramStop, int paramNum, int experiment);
 void slave(int rank);
 void getSeeds(int& start, int& end, string& paramName, double& paramStart, 
 	      double& paramStop, int& paramNum, int& experiment);
@@ -32,6 +32,7 @@ MPI_File * files;
 void openFiles(double paramStart, double paramStop, int paramNum, string paramName,
 	       int experiment);
 void closeFiles(int paramNum);
+int inputFileLength;
 
 int main(int argc, char *argv[]){
 
@@ -52,7 +53,7 @@ int main(int argc, char *argv[]){
   files = new MPI_File [paramNum];
   openFiles(paramStart, paramStop, paramNum, paramName, experiment);
 
-  if(rank == MASTER) master(seedStart, seedEnd, paramStart, paramStop, paramNum);
+  if(rank == MASTER) master(seedStart, seedEnd, paramStart, paramStop, paramNum, experiment);
   else slave(rank);
 
   closeFiles(paramNum); 
@@ -62,7 +63,8 @@ int main(int argc, char *argv[]){
 
 }
 
-void master(int seedStart, int seedEnd, double paramStart, double paramStop, int paramNum){
+void master(int seedStart, int seedEnd, double paramStart, double paramStop, int paramNum, 
+	    int experiment){
 
   int totalSeeds, rank, ntasks, totalJobs, counter = 0;
   deque<int>seedQueue;
@@ -73,11 +75,6 @@ void master(int seedStart, int seedEnd, double paramStart, double paramStop, int
 
   MPI_Status status;
   MPI_Comm_size(MPI_COMM_WORLD, &ntasks);
- 
-  //extra = totalJobs - ntasks - 1;
-  //cout << "EXTRA: " << extra << endl; 
-  //cout << "TOTAL JOBS: " << totalJobs << endl;
-  //cout << "PARAM NUM: " << paramNum << endl;
 
   // Fills the Global Queue
   int seed = seedStart;                                   
@@ -162,9 +159,16 @@ void master(int seedStart, int seedEnd, double paramStart, double paramStop, int
     MPI_Send(0,0,MPI_INT, rank, DIETAG, MPI_COMM_WORLD);
     MPI_Send(0,0,MPI_DOUBLE, rank, DIETAG, MPI_COMM_WORLD);
   } 
-
-
   
+  // update experiment counter  
+  std::fstream input;
+  input.open("input.txt", std::fstream::out);
+  string strNext = to_string(experiment+1) + "\n";
+  int numStart = inputFileLength - (1+to_string(experiment).length());
+  input.seekg(numStart); 
+  input.write(strNext.c_str(), strNext.length());
+  input.seekg(inputFileLength);
+  input.close();
     
    return;
 } //end of master function
@@ -256,12 +260,7 @@ void getSeeds(int& start, int& end, string& paramName, double& paramStart,
   input.getline(line, 256);
   strtok(line, " ");
   experiment = atoi(strtok(NULL, " ")); 
-  string strNext = to_string(experiment+1) + "\n";
-  int length = input.tellg();
-  int numStart = length - (1+to_string(experiment).length());
-  input.seekg(numStart);
-  input.write(strNext.c_str(), strNext.length());
-  input.seekg(length);
+  inputFileLength = input.tellg();
 
   input.close();
 }
