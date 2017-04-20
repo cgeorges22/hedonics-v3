@@ -39,8 +39,6 @@ int main(int argc, char *argv[]){
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &ntasks);
 
-  cout << endl << "BEGINNING!!  " << rank << endl;
-
   int seedStart, seedEnd, paramNum;
   string paramName;
   double paramStart, paramStop;
@@ -48,14 +46,10 @@ int main(int argc, char *argv[]){
   getSeeds(seedStart, seedEnd, paramName, paramStart, paramStop, paramNum);
   //Got the inputs
   
-  cout << "GOT INPUTS  " << rank << endl;
-
   // open the files - must be done by all procesoors synchronously
   files = new MPI_File [paramNum];
   openFiles(paramStart, paramStop, paramNum, paramName);
 
-  cout << "OPENED FILES  " << rank << endl;
-  
   if(rank == MASTER) master(seedStart, seedEnd, paramStart, paramStop, paramNum);
   else slave(rank);
 
@@ -86,7 +80,14 @@ void master(int seedStart, int seedEnd, double paramStart, double paramStop, int
   // Fills the Global Queue
   int seed = seedStart;                                   
   double param; 
-  double step = (paramStop - paramStart)/(paramNum - 1);
+  double step;
+
+  if (paramNum > 1){
+    step = (paramStop - paramStart)/(paramNum - 1);
+  }
+  else {
+    step = 1;
+  }
 
   for(int i = 0; i <= totalSeeds; i++, seed++){
     param = paramStart;
@@ -201,15 +202,11 @@ void getSeeds(int& start, int& end, string& paramName, double& paramStart, doubl
   std::fstream input;
   input.open("input.txt", std::fstream::in);
  
-  cout << "A" << endl;
- 
   // Go through the input file line by line, tokenize the line into three strings
   // Taken from hedonics-v2.10
   input.getline(line, 256);
   variable = strtok(line, " ");
 
-  cout << "B" << endl;
- 
   // get randSeedStart
   while (strcmp(variable, "randSeedStart")) {
     input.getline(line, 256);
@@ -217,14 +214,10 @@ void getSeeds(int& start, int& end, string& paramName, double& paramStart, doubl
   }
   start = atoi(strtok(NULL, " "));
 
-  cout << "C" << endl;
-
   // get randSeedEnd
   input.getline(line, 256);
   strtok(line, " ");
   end = atoi(strtok(NULL, " ")); 
-
-  cout << "D" << endl;
 
   // get paramName
   while (strcmp(variable, "paramName")) {
@@ -233,30 +226,29 @@ void getSeeds(int& start, int& end, string& paramName, double& paramStart, doubl
   }
   paramName = strtok(NULL, " ");
 
-  cout << "E" << endl;
+  if (paramName == "0") {
+    paramStart = 0;
+    paramStop = 0;
+    paramNum = 1;
+  }
+  else {
+    // get paramStart
+    input.getline(line, 256);
+    strtok(line, " ");
+    paramStart = atof(strtok(NULL, " ")); 
 
-  // get paramStart
-  input.getline(line, 256);
-  strtok(line, " ");
-  paramStart = atof(strtok(NULL, " ")); 
+    // get paramStop
+    input.getline(line, 256);
+    strtok(line, " ");
+    paramStop = atof(strtok(NULL, " ")); 
 
-  cout << "F" << endl;
+    // get paramNum
+    input.getline(line, 256);
+    strtok(line, " ");
+    paramNum = atoi(strtok(NULL, " ")); 
+  }
 
-  // get paramStop
-  input.getline(line, 256);
-  strtok(line, " ");
-  paramStop = atof(strtok(NULL, " ")); 
-
-  cout << "G" << endl;
-
-  // get paramNum
-  input.getline(line, 256);
-  strtok(line, " ");
-  paramNum = atoi(strtok(NULL, " ")); 
-
-  cout << "H" << endl;
-
-  input.close();
+    input.close();
 }
 
 void openFiles(double paramStart, double paramStop, int paramNum, string paramName) {
@@ -277,6 +269,10 @@ void openFiles(double paramStart, double paramStop, int paramNum, string paramNa
     
     MPI_File file;
     string file_name = "data1-" + to_string(param) + ".txt";
+
+    if (paramName == "0"){
+      file_name = "data1.txt";
+    }
 
     MPI_File_open(MPI_COMM_WORLD, file_name.c_str(), MPI_MODE_WRONLY|MPI_MODE_CREATE, 
 		MPI_INFO_NULL, &file);

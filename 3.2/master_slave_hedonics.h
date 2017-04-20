@@ -132,6 +132,10 @@ int randSeedStart; //8/10/16
 int randSeedEnd; //8/10/16
 string paramName;
 double paramStart, paramStop, paramStep; // 1/24/17 
+bool commonShocks, imitation, anotation, altPriceIndex, cesHedonics, debugging;
+bool endogInnovation, discChoice, intermediateGoods, multiplicativeMutation;
+bool twoClasses; //5/12/16 alow two consumer/firm classes/submarkets
+bool endogN1N2; //5/29/16 endogenous switching of firms to high profit market
 
 void getInput(double paramValue);
 string IntToStr(int t); //jagonzal added this function 10/7/16
@@ -162,10 +166,6 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
   
   int i,j, round, restarts;
   double totOutput, totUtility, totUtilityPL, totUtilityOH, lastOutput = 0, secs, mutScale, totProdLEmployment, totOHLEmployment;
-  bool commonShocks, imitation, anotation, altPriceIndex, cesHedonics, debugging;
-  bool endogInnovation, discChoice, intermediateGoods, multiplicativeMutation;
-  bool twoClasses; //5/12/16 alow two consumer/firm classes/submarkets
-  bool endogN1N2; //5/29/16 endogenous switching of firms to high profit market
   time_t startTime, endTime;
   
 
@@ -176,7 +176,8 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
   double* mean = new double[randSeedEnd - randSeedStart + 1]; //12/5/16 JKR
   double* vol = new double[randSeedEnd - randSeedStart + 1]; //12/5/16 JKR
   
-
+  // Moved to input.txt KF 4/20/17
+  /*
   cesHedonics = true;
   discChoice = true;
   endogInnovation = true;
@@ -189,7 +190,13 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
   debugging = false; // prints sequence of procedures //8/2/09
   twoClasses = true; // 5/12/16
   endogN1N2 = true; // 5/29/16 endogenous switching of firms to higher profit market
-    
+  */
+
+  cout << cesHedonics << endl << discChoice << endl << endogInnovation << endl << imitation << endl;
+  cout << multiplicativeMutation << endl << intermediateGoods << endl << altPriceIndex << endl;
+  cout << commonShocks << endl << anotation << endl << debugging << endl << twoClasses << endogN1N2 << endl;
+
+
   if(twoClasses) {mutScale = (double) 1.0 / (double) firmNum;} //really should vary with relative firmNums ***
   else {mutScale = (double) 1.0 / (double) firmNum;} //1.0 //for consumer search -- upper limit of share mutations -- should be <1 and on order of 1/firmNum -- 2/firmNum if twoClasses
   firmNum1 = 0; firmNum2 = 0;
@@ -693,9 +700,9 @@ void set_var(char* variable, char const* value) {
      else if (strcmp(variable, "endProductInnovation") == 0) {
          endProductInnovation = atoi(value);
      }
-	 else if (strcmp(variable, "weightRandDDC") == 0) {
+     else if (strcmp(variable, "weightRandDDC") == 0) {
      	 weightRandDDC = atof(value);  
-	 }
+     }
      else if (strcmp(variable, "endConsumerSearch") == 0) {
          endConsumerSearch = atoi(value);
      }
@@ -707,6 +714,42 @@ void set_var(char* variable, char const* value) {
      }
      else if (strcmp(variable, "ownMarketBias") == 0) {
          ownMarketBias = atoi(value);
+     }
+     else if (strcmp(variable, "cesHedonics") == 0) {
+         cesHedonics = atoi(value);
+     }
+     else if (strcmp(variable, "discChoice") == 0) {
+         discChoice = atoi(value);
+     }
+     else if (strcmp(variable, "endogInnovation") == 0) {
+         endogInnovation = atoi(value); 
+     }
+     else if (strcmp(variable, "imitation") == 0) {
+         imitation = atoi(value);
+     }
+     else if (strcmp(variable, "multiplicativeMutation") == 0) {
+         multiplicativeMutation = atoi(value);
+     }	
+     else if (strcmp(variable, "intermediateGoods") == 0) {
+         intermediateGoods = atoi(value);
+     }
+     else if (strcmp(variable, "altPriceIndex") == 0) {
+         altPriceIndex = atoi(value);
+     }
+     else if (strcmp(variable, "commonShocks") == 0) {
+         commonShocks = atoi(value);
+     }
+     else if (strcmp(variable, "anotation") == 0) {
+         anotation = atoi(value);
+     }
+     else if (strcmp(variable, "debugging") == 0) {
+         debugging = atoi(value);
+     }
+     else if (strcmp(variable, "twoClasses") == 0) {
+         twoClasses = atoi(value);
+     }
+     else if (strcmp(variable, "endogN1N2") == 0) {
+         endogN1N2 = atoi(value);
      }
 
     else {
