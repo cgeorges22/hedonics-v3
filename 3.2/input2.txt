@@ -62,4 +62,4 @@ paramName 0
 paramStart 10
 paramStop 10
 paramNum 1
-experiment 3
+experiment 1

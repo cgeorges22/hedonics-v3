@@ -162,12 +162,14 @@ void master(int seedStart, int seedEnd, double paramStart, double paramStop, int
   
   // update experiment counter  
   std::fstream input;
-  input.open("input.txt", std::fstream::out);
+  input.open("input.txt", std::fstream::in | std::fstream::out);
   string strNext = to_string(experiment+1) + "\n";
   int numStart = inputFileLength - (1+to_string(experiment).length());
   input.seekg(numStart); 
+  cout << "file length: " << inputFileLength << endl;
+  cout << "num start: " << numStart << endl;
   input.write(strNext.c_str(), strNext.length());
-  input.seekg(inputFileLength);
+//  input.seekg(inputFileLength);
   input.close();
     
    return;
