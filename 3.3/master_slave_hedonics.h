@@ -1,6 +1,8 @@
 //  Hedonics
+//  v3.3 Kat Fuzesi	Apr 2017	added experiment counter to input file
 //  v3.2 Kat Fuzesi	Jan 2017	exploring parameter space exports to multiple files
 //  					NOTE: if not used, set paramName = 0 in input file
+//  					moved booleans to input file
 //  v3.1 Kat Fuzesi	Jan 2017	added option to explore the parameter space 
 //  v3.0 JKR            Dec 2016        added parallelization to increase simulation speed    
 //  v2.10 CG		June 2016	experiments with single changes in params such as eta during run
