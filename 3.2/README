@@ -1,0 +1,47 @@
+// To set up a new git repository:
+$ git clone https://github.com/cgeorges22/hedonics-v3.git
+
+
+// To work with git on a day to day basis:
+
+// Enter the hedonics-v3 directory.
+
+$ git pull
+
+// Write code
+
+// Add all changes
+$ git add -A
+
+// Add specific changes
+$ git add file_name.ext
+
+// Commit and push
+$ git commit -m "Type a message here"
+$ git push origin master
+
+
+// To run our code
+
+// Update input.txt accordingly
+// Update queue.sim to indicate how many processors you would like to use
+// Inside queue.sim:
+
+#PBS -l nodes=2:ppn=8
+
+// ppn will always be 8. nodes can be between 1 and 62
+
+/usr/lib64/mvapich2/bin/mpiexec -np 16 ./queue_sim input.txt
+
+// After -np, type the total number of processors; ie. nodes x ppn
+
+// Run the following commands
+
+$ module load mpi/mvapich2-x86_64     // load mpi
+$ make clean
+$ make                                // compile the program
+$ qsub queue_sim                      // add the program to the hpc queue
+
+$ showq                               // get information about the queue
+$ qstat                               // ditto
+
