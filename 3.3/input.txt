@@ -1,4 +1,4 @@
-firmNum  10
+firmNum  1000
 rounds  5000
 randSeedStart 1
 randSeedEnd 10
@@ -37,8 +37,8 @@ intPriceDiscount  0.7
 incrementFactor  0.01
 cesHedonicsElastGoods  0.8
 cesHedonicsElastChars  0.8
-riGain  0.1
-rpGain  0.2
+riGain  0.01
+rpGain  0.01
 intensityOfChoice  0.5
 probRandDInvestMutation  0.01
 weightRandDDC  0.5
@@ -58,8 +58,8 @@ anotation 0
 debugging 0
 twoClasses 1
 endogN1N2 1
-paramName 0 
-paramStart 10
-paramStop 10
-paramNum 1
-experiment 3
+paramName overHeadRandDReq 
+paramStart 0.5
+paramStop 1.0
+paramNum 2
+experiment 5
