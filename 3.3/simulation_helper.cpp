@@ -28,7 +28,7 @@ void slave(int rank);
 void getSeeds(int& start, int& end, string& paramName, double& paramStart, 
 	      double& paramStop, int& paramNum, int& experiment);
 //MPI_File file;
-MPI_File * files; 
+MPI_File ** files; 
 void openFiles(double paramStart, double paramStop, int paramNum, string paramName,
 	       int experiment);
 void closeFiles(int paramNum);
@@ -50,7 +50,10 @@ int main(int argc, char *argv[]){
   //Got the inputs
   
   // open the files - must be done by all procesoors synchronously
-  files = new MPI_File [paramNum];
+  files = new MPI_File * [paramNum];
+  for (int i = 0; i < paramNum; i++)
+    files[i] = new MPI_File[5];
+
   openFiles(paramStart, paramStop, paramNum, paramName, experiment);
 
   if(rank == MASTER) master(seedStart, seedEnd, paramStart, paramStop, paramNum, experiment);
@@ -111,8 +114,6 @@ void master(int seedStart, int seedEnd, double paramStart, double paramStop, int
       param = paramQueue.front();
       paramQueue.pop_front();
    
-      cout << "COUNT: " << counter++ << endl;;
-
       MPI_Send(&seed, 1, MPI_INT,rank, 1, MPI_COMM_WORLD);
       MPI_Send(&fileNum, 1, MPI_INT,rank, 1, MPI_COMM_WORLD);
       MPI_Send(&param, 1, MPI_DOUBLE,rank, 1, MPI_COMM_WORLD); 
@@ -134,11 +135,7 @@ void master(int seedStart, int seedEnd, double paramStart, double paramStop, int
     param = paramQueue.front();
     paramQueue.pop_front();
    
-    cout <<  "COUNT: " << counter-- << endl;;
-    
     MPI_Recv(0, 0, MPI_INT, MPI_ANY_SOURCE, NEEDWORK,MPI_COMM_WORLD,&status);
-
-    cout <<  "COUNT: " << counter++ << endl;;
 
     MPI_Send(&seed, 1, MPI_INT, status.MPI_SOURCE, WORKTAG, MPI_COMM_WORLD); 
     MPI_Send(&fileNum, 1, MPI_INT,status.MPI_SOURCE, WORKTAG, MPI_COMM_WORLD);
@@ -147,7 +144,6 @@ void master(int seedStart, int seedEnd, double paramStart, double paramStop, int
 
   if (extra)
     for (int i = 1; i < ntasks; i++){
-      cout << "COUNT: " <<  counter-- << endl;;
       MPI_Recv(0, 0, MPI_INT, MPI_ANY_SOURCE, NEEDWORK,MPI_COMM_WORLD,&status);
     }
 
@@ -166,8 +162,6 @@ void master(int seedStart, int seedEnd, double paramStart, double paramStop, int
   string strNext = to_string(experiment+1) + "\n";
   int numStart = inputFileLength - (1+to_string(experiment).length());
   input.seekg(numStart); 
-  cout << "file length: " << inputFileLength << endl;
-  cout << "num start: " << numStart << endl;
   input.write(strNext.c_str(), strNext.length());
 //  input.seekg(inputFileLength);
   input.close();
@@ -193,7 +187,7 @@ void slave(int rank){
        return;
      }
   
-     MPI_File file = files[fileNum]; 
+     MPI_File * file = files[fileNum]; 
      
      simulation(seed, rank, file, param);
 
@@ -268,7 +262,7 @@ void getSeeds(int& start, int& end, string& paramName, double& paramStart,
 }
 
 void openFiles(double paramStart, double paramStop, int paramNum, string paramName,
-	       int experiment) {
+	      int experiment) {
  
   double step, param;
 
@@ -282,26 +276,29 @@ void openFiles(double paramStart, double paramStop, int paramNum, string paramNa
     param = paramStart;
   }
 
-  for (int i = 0; i < paramNum; i++, param += step){
-    
-    MPI_File file;
-    string file_name = to_string(experiment) + "-data1-" + to_string(param) + ".txt";
+  for (int i = 0; i < paramNum; i++, param += step){  
+    for (int k = 1; k <= 5; k++) {
+
+      MPI_File file;
+      string file_name = to_string(experiment) + "-data" + to_string(k) + "-" + to_string(param) + ".txt";
  
-    if (paramName == "0"){
-      file_name =  to_string(experiment) + "-data1.txt";
-    }
+      if (paramName == "0"){
+        file_name =  to_string(experiment) + "-data" + to_string(k) + ".txt";
+      }
 
-    MPI_File_open(MPI_COMM_WORLD, file_name.c_str(), MPI_MODE_WRONLY|MPI_MODE_CREATE, 
-		MPI_INFO_NULL, &file);
+      MPI_File_open(MPI_COMM_WORLD, file_name.c_str(), MPI_MODE_WRONLY|MPI_MODE_CREATE, 
+		    MPI_INFO_NULL, &file);
 
-    files[i] = file;
+      files[i][k-1] = file;
 
-  } 
+    } 
+  }
 }
 
 void closeFiles(int paramNum){
   
   for (int i = 0; i < paramNum; i++)
-    MPI_File_close(&(files[i]));
+    for (int k = 0; k < 5; k++)
+      MPI_File_close(&(files[i][k]));
 
 }

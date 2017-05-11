@@ -1,7 +1,7 @@
 firmNum  10
 rounds  5000
 randSeedStart 1
-randSeedEnd 10
+randSeedEnd 100
 startOutput1  1
 outputFrequency  10
 printRoundsFrequency  1000
@@ -58,8 +58,8 @@ anotation 0
 debugging 0
 twoClasses 1
 endogN1N2 1
-paramName 0 
-paramStart 10
-paramStop 10
-paramNum 1
-experiment 3
+paramName 0
+paramStart 0
+paramStop 0
+paramNum 0
+experiment 6

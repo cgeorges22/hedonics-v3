@@ -143,23 +143,26 @@ void getInput(double paramValue);
 string IntToStr(int t); //jagonzal added this function 10/7/16
 
 // Main Function
-int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
+int simulation(int randSeed, int rank, MPI_File * file, double paramValue) {
 
 
   //Parallelization begins here 10/7/16 
+  /* 
    string data1;
    string data2;
    string data3;
    string data4;
    string data5;
    string testfile;
-
+  */
   //output files
+  /*
   std::ofstream output1("data1.txt",ios_base::app);	//output timm series of aggregate data
   std::ofstream output2("data2.txt",ios_base::app);	//output last round firm distributions of size, productivity, etc.
   std::ofstream output3("data3.txt",ios_base::app);	//output time series for six representative firms
   std::ofstream output4("data4.txt",ios_base::app);	//output last round firm dist of hedonic quality vectors and final demand shares
   std::ofstream output5("data5.txt",ios_base::app);	//output mean and volatility of Yc for each randSeed //7/6/09	
+  */
   std::ofstream testoutput("test.txt",ios_base::app);	//track firm 6 if anotation switch is on
   
   //for looping over random seeds
@@ -193,11 +196,6 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
   twoClasses = true; // 5/12/16
   endogN1N2 = true; // 5/29/16 endogenous switching of firms to higher profit market
   */
-
-  cout << cesHedonics << endl << discChoice << endl << endogInnovation << endl << imitation << endl;
-  cout << multiplicativeMutation << endl << intermediateGoods << endl << altPriceIndex << endl;
-  cout << commonShocks << endl << anotation << endl << debugging << endl << twoClasses << endogN1N2 << endl;
-
 
   if(twoClasses) {mutScale = (double) 1.0 / (double) firmNum;} //really should vary with relative firmNums ***
   else {mutScale = (double) 1.0 / (double) firmNum;} //1.0 //for consumer search -- upper limit of share mutations -- should be <1 and on order of 1/firmNum -- 2/firmNum if twoClasses
@@ -420,7 +418,7 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
       //output main time series to output1 (for first randSeed only) (and before restarts)
       if(round >= startOutput1 && round % outputFrequency == 0){// && randSeed == randSeedStart){  //6/02/09 added totUtility, removed avQual 6/8/09 add nomGDP realGDP gdpdeflator
 		if(debugging){printf("output1 for round %d \n", round + 1);} //8/2/09 
-		string data_to_output = to_string(rank) + " " + to_string(randSeed) + " " + to_string(round) + " " + to_string(totOutput) 
+		string data1_to_output = to_string(rank) + " " + to_string(randSeed) + " " + to_string(round) + " " + to_string(totOutput) 
 					+ " " + to_string(gdpDeflator) + " " + to_string(firmNum1) + " " + to_string(firmNum2) + " " + to_string(totUtility) + " " 
 					+ to_string(totUtilityPL) + " " + to_string(totUtilityOH)  + " " + to_string(wageBill) + " " + to_string(salaryBill) + " " 
 					+ to_string(totProdLEmployment) + " " + to_string(totOHLEmployment) + " " + to_string(restarts) + " " + to_string(numRandD) 
@@ -431,7 +429,7 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
 		// output to data1 file JKR 1/23/17	
 		MPI_Status io_status;
 		//cout << file << endl;
-		MPI_File_write_shared(file, data_to_output.c_str(), data_to_output.size(), MPI_CHAR, &io_status);      			
+		MPI_File_write_shared(file[0], data1_to_output.c_str(), data1_to_output.size(), MPI_CHAR, &io_status);      			
 
       }
       //output sixfirm time series to output3 (for first randSeed only)
@@ -503,9 +501,20 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
     if(randSeed == randSeedStart){
       if(debugging){printf("output4 for last round \n");} //8/2/09
       for(i = 0; i < firmNum; i++) {
-		for(j = 0; j < numHedonicElements; j++) {output4 << (firms[i]).getHedonicQualityElementJ(j) << " ";}
-		output4 << "  " << (firms[i]).getFinalDemandShare() << "\n";
-		output4 << " " << (firms[i]).getType() << "\n"; //5/18/16
+
+		// output using MPI librarys KF 5/10/17		
+                string data4_to_output = "";
+		for(j = 0; j < numHedonicElements; j++) {
+			//output4 << (firms[i]).getHedonicQualityElementJ(j) << " ";
+			data4_to_output += to_string((firms[i]).getHedonicQualityElementJ(j)) + " ";
+		}
+
+		data4_to_output += "  " + to_string((firms[i]).getFinalDemandShare()) + " " + to_string((firms[i]).getType()) + "\n"; 
+		MPI_Status io_status;
+                MPI_File_write_shared(file[3], data4_to_output.c_str(), data4_to_output.size(), MPI_CHAR, &io_status);
+
+	//	output4 << "  " << (firms[i]).getFinalDemandShare() << "\n";
+	//	output4 << " " << (firms[i]).getType() << "\n"; //5/18/16
 	//printf("at end of simulation, firm %d has innovation status %d \n",i+1,firms[i].getRandDInvestment());//3/24/10 testing
       }
     }
@@ -518,8 +527,13 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
     printf("final numbers of firms in markets 1 and 2 are %d and %d \n ", firmNum1, firmNum2);
     
     //for all randSeeds, output mean and volatility of Yc to output5 -- volatility is average absolute % change from volatilityMeasureFrequency periods ago
-    output5 << randSeed << " " << mean[randSeed-randSeedStart] << " " << vol[randSeed-randSeedStart] << "\n"; //7/6/09
+    //output5 << randSeed << " " << mean[randSeed-randSeedStart] << " " << vol[randSeed-randSeedStart] << "\n"; //7/6/09
     
+    // output using MPI librarys KF 5/10/17
+    string data5_to_output = to_string(randSeed) + " " + to_string(mean[randSeed-randSeedStart]) + " " + to_string(vol[randSeed-randSeedStart]) + "\n"; //7/6/09
+    MPI_Status io_status;
+    MPI_File_write_shared(file[4], data5_to_output.c_str(), data5_to_output.size(), MPI_CHAR, &io_status);
+
     time(&endTime);
     secs = difftime(endTime, startTime);
     printf("Done Running Simulation. \n" ); 
@@ -534,11 +548,15 @@ int simulation(int randSeed, int rank, MPI_File file, double paramValue) {
     //close output files at end of all runs
   delete[] mean;
   delete[] vol;
+  
+  /*
   output1.close();
   output2.close();
   output3.close();
   output4.close(); //7/5/09
   output5.close(); //7/6/09
+  */ 
+
   testoutput.close();
   
   system("PAUSE"); //only for windows
