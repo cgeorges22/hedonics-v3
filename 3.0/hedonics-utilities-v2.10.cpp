@@ -1606,7 +1606,7 @@ void updateRandDInvestmentStatusDC(firm firms[], const int firmNum, double inten
 	else {  //else condition on own market relative profit  //5/28/16
         if(avgRecentProfitType1 > avgRecentProfitType2) { //5/28/16
 		     for(i = 0; i<firmNum; i++) {
-		     	if(randNumUni() > (2 - 2 * discChoiceProb1)){
+		       if(randNumUni() > (2 - 2 * discChoiceProb2)){ //correct error by changing Prob1 to Prob2
                    	if(firms[i].getType()==1 && firms[i].getRandDInvestment()==false) { //only switch if not investing
                     	firms[i].setRandDInvestment(true);
               			//if(i==4){printf("firm %d has random innovation switch in round %d to %d \n",i,round,firms[i].getRandDInvestment());} //3/24/10 testing	
@@ -1620,16 +1620,16 @@ void updateRandDInvestmentStatusDC(firm firms[], const int firmNum, double inten
         }	
         if(avgRecentProfitType1 < avgRecentProfitType2) { //changed 4/6/16
 		     for(i = 0; i<firmNum; i++) {
-		     	if(randNumUni() > (2 * discChoiceProb1)) {
+		       if(randNumUni() > (2 * discChoiceProb2)) { //corrected by changing Prob1 to Prob2
                    	if(firms[i].getType()==1 && firms[i].getRandDInvestment()==true) {
                         firms[i].setRandDInvestment(false);
               			//if(i==4){printf("firm %d has random innovation switch in round %d to %d \n",i,round,firms[i].getRandDInvestment());} //3/24/10 testing	
 		        	}
                     if(firms[i].getType()==2 && firms[i].getRandDInvestment()==false) {
-                        if(randNumUni() > (2 * discChoiceProb1)) {
+		      //if(randNumUni() > (2 * discChoiceProb1)) { //corrected by removing line
                         	firms[i].setRandDInvestment(true);
               				//if(i==4){printf("firm %d has random innovation switch in round %d to %d \n",i,round,firms[i].getRandDInvestment());} //3/24/10 testing	
-		                }
+		                //} //corrected by removing line
                    	} 
         		} 
 			}

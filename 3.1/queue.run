@@ -1,9 +1,10 @@
 #PBS -l nodes=3:ppn=8
-#PBS -l walltime=01:00:00
+#PBS -l walltime=72:00:00
 #PBS -q una
 #PBS -j oe
-#PBS -M kfuzesi@hamilton.edu
+#PBS -M cgeorges@hamilton.edu
 #PBS -m ea
 
 cd $PBS_O_WORKDIR
+module load mpi/mvapich2-x86_64
 /usr/lib64/mvapich2/bin/mpiexec -np 24 ./queue_sim

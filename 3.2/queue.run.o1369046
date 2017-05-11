@@ -1,0 +1,967 @@
+host: una0017.hpc.hamilton.edu
+
+==================================================================================================
+mpiexec options:
+----------------
+  Base path: /usr/lib64/mvapich2/bin/
+  Launcher: (null)
+  Debug level: 1
+  Enable X: -1
+
+  Global environment:
+  -------------------
+    MPI_INCLUDE=/usr/include/mvapich2-x86_64
+    MANPATH=/usr/share/man/mvapich2-x86_64:/usr/man:/usr/local/X11/man:/man:/usr/local/man:/usr/X11R6/man:/usr/share/man:/usr/share/catman:/usr/local/global/man:/home/kfuzesi/man
+    XDG_SESSION_ID=308742
+    HOSTNAME=una0017.hpc.hamilton.edu
+    PBS_VERSION=TORQUE-6.0.1
+    TERM=xterm
+    SHELL=/bin/bash
+    HISTSIZE=1000
+    SCRATCH_PATH=/scratch/kfuzesi
+    SSH_CLIENT=150.209.9.199 37812 22
+    PBS_JOBNAME=queue.run
+    PBS_ENVIRONMENT=PBS_BATCH
+    OLDPWD=/home/kfuzesi
+    PBS_O_WORKDIR=/home/kfuzesi/hedonics-v3/3.2
+    SSH_TTY=/dev/pts/11
+    OSVERS=3.10.0-514.16.1.el7.x86_64
+    MPI_PYTHON_SITEARCH=/usr/lib64/python2.7/site-packages/mvapich2
+    MV2_RNDV_PROTOCOL=R3
+    USER=kfuzesi
+    PBS_TASKNUM=1
+    LD_LIBRARY_PATH=/usr/lib64/mvapich2/lib:/lib:/usr/lib:/usr/local/lib:/usr/local/lib/X11:/usr/local/global/lib:/usr/lib64:/home/kfuzesi/lib:/home/kfuzesi/lib64
+    LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+    PBS_O_HOME=/home/kfuzesi
+    CPATH=/usr/local/include:/usr/include
+    PBS_WALLTIME=3600
+    MPI_LIB=/usr/lib64/mvapich2/lib
+    MV2_ENABLE_AFFINITY=0
+    PBS_MOMPORT=15003
+    PBS_GPUFILE=/var/spool/torque/aux//1369046.grid.hpc.hamilton.edugpu
+    APP_PATH=/usr/local/Dist
+    PBS_O_QUEUE=una
+    PATH=/usr/lib64/mvapich2/bin:/sbin:/bin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/sbin:/usr/bin/X11:/usr/local/global/bin:/usr/local/global/sbin:/usr/kerberos/bin/:/home/kfuzesi/bin:/opt/ibutils/bin
+    PBS_O_LOGNAME=kfuzesi
+    MAIL=/var/spool/mail/kfuzesi
+    PBS_O_LANG=en_US.UTF-8
+    MPI_BIN=/usr/lib64/mvapich2/bin
+    MACH_TYPE=Linux
+    PBS_JOBCOOKIE=CAC0AB4F17C63AE637FB522E4C586048
+    MPI_COMPILER=mvapich2-x86_64
+    PWD=/home/kfuzesi/hedonics-v3/3.2
+    _LMFILES_=/etc/modulefiles/mpi/mvapich2-x86_64
+    EDITOR=vim
+    LANG=en_US.UTF-8
+    PBS_NODENUM=0
+    MODULEPATH=/etc/modulefiles:/usr/local/global/modulefiles
+    LOADEDMODULES=mpi/mvapich2-x86_64
+    PBS_NUM_NODES=1
+    PBS_O_SHELL=/bin/bash
+    PBS_JOBID=1369046.grid.hpc.hamilton.edu
+    HISTCONTROL=ignoredups
+    ENVIRONMENT=BATCH
+    MPI_SYSCONFIG=/etc/mvapich2-x86_64
+    SHLVL=3
+    HOME=/home/kfuzesi
+    OSTYPE=Linux
+    PBS_O_HOST=grid.hpc.hamilton.edu
+    MPI_SUFFIX=_mvapich2
+    MPI_MAN=/usr/share/man/mvapich2-x86_64
+    PBS_VNODENUM=0
+    PYTHONPATH=/usr/lib64/python2.7/site-packages/mvapich2
+    LOGNAME=kfuzesi
+    SSH_CONNECTION=150.209.9.199 37812 150.209.9.107 22
+    PBS_QUEUE=una
+    MPI_HOME=/usr/lib64/mvapich2
+    MPI_FORTRAN_MOD_DIR=/usr/lib64/gfortran/modules/mvapich2-x86_64
+    MODULESHOME=/usr/share/Modules
+    PKG_CONFIG_PATH=/usr/lib64/mvapich2/lib/pkgconfig
+    PBS_O_MAIL=/var/spool/mail/kfuzesi
+    LESSOPEN=||/usr/bin/lesspipe.sh %s
+    PBS_MICFILE=/var/spool/torque/aux//1369046.grid.hpc.hamilton.edumic
+    ARCH=x86_64
+    XDG_RUNTIME_DIR=/run/user/2030
+    PBS_NP=8
+    PBS_O_SERVER=grid.hpc.hamilton.edu
+    PBS_NUM_PPN=8
+    PBS_NODEFILE=/var/spool/torque/aux//1369046.grid.hpc.hamilton.edu
+    PBS_O_PATH=/usr/lib64/mvapich2/bin:/sbin:/bin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/sbin:/usr/bin/X11:/usr/local/global/bin:/usr/local/global/sbin:/usr/kerberos/bin/:/home/kfuzesi/bin
+    BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}
+    _=/usr/lib64/mvapich2/bin/mpiexec
+
+  Hydra internal environment:
+  ---------------------------
+    GFORTRAN_UNBUFFERED_PRECONNECTED=y
+
+
+    Proxy information:
+    *********************
+      [1] proxy: una0017.hpc.hamilton.edu (8 cores)
+      Exec list: ./queue_sim (8 processes); 
+
+
+==================================================================================================
+
+[mpiexec@una0017.hpc.hamilton.edu] Timeout set to -1 (-1 means infinite)
+[mpiexec@una0017.hpc.hamilton.edu] Got a control port string of una0017.hpc.hamilton.edu:44423
+
+Proxy launch args: /usr/lib64/mvapich2/bin/hydra_pmi_proxy --control-port una0017.hpc.hamilton.edu:44423 --debug --rmk pbs --launcher ssh --demux poll --pgid 0 --retries 10 --usize -2 --proxy-id 
+
+Arguments being passed to proxy 0:
+--version 3.0.4 --iface-ip-env-name MPICH_INTERFACE_HOSTNAME --hostname una0017.hpc.hamilton.edu --global-core-map 0,8,8 --pmi-id-map 0,0 --global-process-count 8 --auto-cleanup 1 --pmi-kvsname kvs_6801_0 --pmi-process-mapping (vector,(0,1,8)) --ckpoint-num -1 --global-inherited-env 79 'MPI_INCLUDE=/usr/include/mvapich2-x86_64' 'MANPATH=/usr/share/man/mvapich2-x86_64:/usr/man:/usr/local/X11/man:/man:/usr/local/man:/usr/X11R6/man:/usr/share/man:/usr/share/catman:/usr/local/global/man:/home/kfuzesi/man' 'XDG_SESSION_ID=308742' 'HOSTNAME=una0017.hpc.hamilton.edu' 'PBS_VERSION=TORQUE-6.0.1' 'TERM=xterm' 'SHELL=/bin/bash' 'HISTSIZE=1000' 'SCRATCH_PATH=/scratch/kfuzesi' 'SSH_CLIENT=150.209.9.199 37812 22' 'PBS_JOBNAME=queue.run' 'PBS_ENVIRONMENT=PBS_BATCH' 'OLDPWD=/home/kfuzesi' 'PBS_O_WORKDIR=/home/kfuzesi/hedonics-v3/3.2' 'SSH_TTY=/dev/pts/11' 'OSVERS=3.10.0-514.16.1.el7.x86_64' 'MPI_PYTHON_SITEARCH=/usr/lib64/python2.7/site-packages/mvapich2' 'MV2_RNDV_PROTOCOL=R3' 'USER=kfuzesi' 'PBS_TASKNUM=1' 'LD_LIBRARY_PATH=/usr/lib64/mvapich2/lib:/lib:/usr/lib:/usr/local/lib:/usr/local/lib/X11:/usr/local/global/lib:/usr/lib64:/home/kfuzesi/lib:/home/kfuzesi/lib64' 'LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:' 'PBS_O_HOME=/home/kfuzesi' 'CPATH=/usr/local/include:/usr/include' 'PBS_WALLTIME=3600' 'MPI_LIB=/usr/lib64/mvapich2/lib' 'MV2_ENABLE_AFFINITY=0' 'PBS_MOMPORT=15003' 'PBS_GPUFILE=/var/spool/torque/aux//1369046.grid.hpc.hamilton.edugpu' 'APP_PATH=/usr/local/Dist' 'PBS_O_QUEUE=una' 'PATH=/usr/lib64/mvapich2/bin:/sbin:/bin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/sbin:/usr/bin/X11:/usr/local/global/bin:/usr/local/global/sbin:/usr/kerberos/bin/:/home/kfuzesi/bin:/opt/ibutils/bin' 'PBS_O_LOGNAME=kfuzesi' 'MAIL=/var/spool/mail/kfuzesi' 'PBS_O_LANG=en_US.UTF-8' 'MPI_BIN=/usr/lib64/mvapich2/bin' 'MACH_TYPE=Linux' 'PBS_JOBCOOKIE=CAC0AB4F17C63AE637FB522E4C586048' 'MPI_COMPILER=mvapich2-x86_64' 'PWD=/home/kfuzesi/hedonics-v3/3.2' '_LMFILES_=/etc/modulefiles/mpi/mvapich2-x86_64' 'EDITOR=vim' 'LANG=en_US.UTF-8' 'PBS_NODENUM=0' 'MODULEPATH=/etc/modulefiles:/usr/local/global/modulefiles' 'LOADEDMODULES=mpi/mvapich2-x86_64' 'PBS_NUM_NODES=1' 'PBS_O_SHELL=/bin/bash' 'PBS_JOBID=1369046.grid.hpc.hamilton.edu' 'HISTCONTROL=ignoredups' 'ENVIRONMENT=BATCH' 'MPI_SYSCONFIG=/etc/mvapich2-x86_64' 'SHLVL=3' 'HOME=/home/kfuzesi' 'OSTYPE=Linux' 'PBS_O_HOST=grid.hpc.hamilton.edu' 'MPI_SUFFIX=_mvapich2' 'MPI_MAN=/usr/share/man/mvapich2-x86_64' 'PBS_VNODENUM=0' 'PYTHONPATH=/usr/lib64/python2.7/site-packages/mvapich2' 'LOGNAME=kfuzesi' 'SSH_CONNECTION=150.209.9.199 37812 150.209.9.107 22' 'PBS_QUEUE=una' 'MPI_HOME=/usr/lib64/mvapich2' 'MPI_FORTRAN_MOD_DIR=/usr/lib64/gfortran/modules/mvapich2-x86_64' 'MODULESHOME=/usr/share/Modules' 'PKG_CONFIG_PATH=/usr/lib64/mvapich2/lib/pkgconfig' 'PBS_O_MAIL=/var/spool/mail/kfuzesi' 'LESSOPEN=||/usr/bin/lesspipe.sh %s' 'PBS_MICFILE=/var/spool/torque/aux//1369046.grid.hpc.hamilton.edumic' 'ARCH=x86_64' 'XDG_RUNTIME_DIR=/run/user/2030' 'PBS_NP=8' 'PBS_O_SERVER=grid.hpc.hamilton.edu' 'PBS_NUM_PPN=8' 'PBS_NODEFILE=/var/spool/torque/aux//1369046.grid.hpc.hamilton.edu' 'PBS_O_PATH=/usr/lib64/mvapich2/bin:/sbin:/bin:/usr/local/bin:/usr/bin:/usr/sbin:/usr/X11R6/bin:/usr/local/sbin:/usr/bin/X11:/usr/local/global/bin:/usr/local/global/sbin:/usr/kerberos/bin/:/home/kfuzesi/bin' 'BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}' '_=/usr/lib64/mvapich2/bin/mpiexec' --global-user-env 0 --global-system-env 1 'GFORTRAN_UNBUFFERED_PRECONNECTED=y' --proxy-core-count 8 --exec --exec-appnum 0 --exec-proc-count 8 --exec-local-env 0 --exec-wdir /home/kfuzesi/hedonics-v3/3.2 --exec-args 1 ./queue_sim 
+
+[mpiexec@una0017.hpc.hamilton.edu] Launch arguments: /usr/lib64/mvapich2/bin/hydra_pmi_proxy --control-port una0017.hpc.hamilton.edu:44423 --debug --rmk pbs --launcher ssh --demux poll --pgid 0 --retries 10 --usize -2 --proxy-id 0 
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 16): init
+pmi_version=1 pmi_subversion=1 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=response_to_init pmi_version=1 pmi_subversion=1 rc=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 0): init
+pmi_version=1 pmi_subversion=1 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=response_to_init pmi_version=1 pmi_subversion=1 rc=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 16): get_maxes
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=maxes kvsname_max=256 keylen_max=64 vallen_max=1024
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 23): init
+pmi_version=1 pmi_subversion=1 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=response_to_init pmi_version=1 pmi_subversion=1 rc=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 0): get_maxes
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=maxes kvsname_max=256 keylen_max=64 vallen_max=1024
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 16): get_appnum
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=appnum appnum=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 23): get_maxes
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=maxes kvsname_max=256 keylen_max=64 vallen_max=1024
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 0): get_appnum
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=appnum appnum=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 16): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 0): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 16): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 23): get_appnum
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=appnum appnum=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 0): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 29): init
+pmi_version=1 pmi_subversion=1 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=response_to_init pmi_version=1 pmi_subversion=1 rc=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 16): get
+kvsname=kvs_6801_0 key=PMI_process_mapping 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=get_result rc=0 msg=success value=(vector,(0,1,8))
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 23): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 29): get_maxes
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=maxes kvsname_max=256 keylen_max=64 vallen_max=1024
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 29): get_appnum
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=appnum appnum=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 0): get
+kvsname=kvs_6801_0 key=PMI_process_mapping 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=get_result rc=0 msg=success value=(vector,(0,1,8))
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 23): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 20): init
+pmi_version=1 pmi_subversion=1 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=response_to_init pmi_version=1 pmi_subversion=1 rc=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 23): get
+kvsname=kvs_6801_0 key=PMI_process_mapping 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=get_result rc=0 msg=success value=(vector,(0,1,8))
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 29): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 20): get_maxes
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=maxes kvsname_max=256 keylen_max=64 vallen_max=1024
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 20): get_appnum
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=appnum appnum=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 29): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 8): init
+pmi_version=1 pmi_subversion=1 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=response_to_init pmi_version=1 pmi_subversion=1 rc=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 8): get_maxes
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=maxes kvsname_max=256 keylen_max=64 vallen_max=1024
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 20): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 29): get
+kvsname=kvs_6801_0 key=PMI_process_mapping 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=get_result rc=0 msg=success value=(vector,(0,1,8))
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 8): get_appnum
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=appnum appnum=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 20): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 8): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 20): get
+kvsname=kvs_6801_0 key=PMI_process_mapping 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=get_result rc=0 msg=success value=(vector,(0,1,8))
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 8): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 8): get
+kvsname=kvs_6801_0 key=PMI_process_mapping 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=get_result rc=0 msg=success value=(vector,(0,1,8))
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 26): init
+pmi_version=1 pmi_subversion=1 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=response_to_init pmi_version=1 pmi_subversion=1 rc=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 26): get_maxes
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=maxes kvsname_max=256 keylen_max=64 vallen_max=1024
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 26): get_appnum
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=appnum appnum=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 26): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 26): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 6): init
+pmi_version=1 pmi_subversion=1 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=response_to_init pmi_version=1 pmi_subversion=1 rc=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 6): get_maxes
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=maxes kvsname_max=256 keylen_max=64 vallen_max=1024
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 26): get
+kvsname=kvs_6801_0 key=PMI_process_mapping 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=get_result rc=0 msg=success value=(vector,(0,1,8))
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 6): get_appnum
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=appnum appnum=0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 6): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 6): get_my_kvsname
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=my_kvsname kvsname=kvs_6801_0
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 6): get
+kvsname=kvs_6801_0 key=PMI_process_mapping 
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=get_result rc=0 msg=success value=(vector,(0,1,8))
+COUNT: 0
+COUNT: 1
+COUNT: 2
+COUNT: 3
+COUNT: 4
+COUNT: 5
+COUNT: 6
+COUNT: 7
+Variable name: 0 not recognized. No value set.
+1
+1
+1
+1
+1
+0
+0
+0
+0
+0
+11
+Number of rounds is 5000
+number of firms is 10 
+size of firm is 1800 B; size of population is 0.018000 MB 
+intensity of choics is 0.500000 
+weightRandDDC is 0.500000 
+endConsumerSearch is 200000 
+probRandDInvestMutation is 0.010000 
+probSwitchMarkets to higher profit market at restart is 0.200000 
+probRandomSwitchMarkets at restart is 0.000000 
+number of products with integer constraints is 0 
+number of products with complements at start of simulation is 0 
+The numbers of firms of types 1 and 2 are 5 and 5 
+at start of simulation, firm 5 has markup 2.000000 
+at start of simulation, firm 5 has price 2.000000 
+at start of simulation, firm 5 has wage 1.000000 
+initial utility for production workers in round 1 is 0.034925 
+initial utility for overhead workers in round 1 is 0.065697 
+Variable name: 0 not recognized. No value set.
+1
+1
+1
+1
+1
+0
+0
+0
+0
+0
+11
+Variable name: 0 not recognized. No value set.
+Number of rounds is 5000
+number of firms is 10 
+1
+1
+1
+1
+1
+0
+0
+size of firm is 1800 B; size of population is 0.018000 MB 
+intensity of choics is 0.500000 
+weightRandDDC is 0.500000 
+endConsumerSearch is 200000 
+probRandDInvestMutation is 0.010000 
+probSwitchMarkets to higher profit market at restart is 0.200000 
+probRandomSwitchMarkets at restart is 0.000000 
+0
+0
+0
+11
+number of products with integer constraints is 0 
+number of products with complements at start of simulation is 0 
+The numbers of firms of types 1 and 2 are 5 and 5 
+at start of simulation, firm 5 has markup 2.000000 
+at start of simulation, firm 5 has price 2.000000 
+Number of rounds is 5000
+number of firms is 10 
+size of firm is 1800 B; size of population is 0.018000 MB 
+intensity of choics is 0.500000 
+weightRandDDC is 0.500000 
+endConsumerSearch is 200000 
+probRandDInvestMutation is 0.010000 
+probSwitchMarkets to higher profit market at restart is 0.200000 
+at start of simulation, firm 5 has wage 1.000000 
+probRandomSwitchMarkets at restart is 0.000000 
+number of products with integer constraints is 0 
+number of products with complements at start of simulation is 0 
+The numbers of firms of types 1 and 2 are 5 and 5 
+at start of simulation, firm 5 has markup 2.000000 
+at start of simulation, firm 5 has price 2.000000 
+at start of simulation, firm 5 has wage 1.000000 
+initial utility for production workers in round 1 is 0.063489 
+initial utility for production workers in round 1 is 0.060452 
+Variable name: 0 not recognized. No value set.
+1
+1
+1
+1
+1
+0
+0
+0
+0
+0
+11
+Number of rounds is 5000
+number of firms is 10 
+size of firm is 1800 B; size of population is 0.018000 MB 
+intensity of choics is 0.500000 
+weightRandDDC is 0.500000 
+endConsumerSearch is 200000 
+probRandDInvestMutation is 0.010000 
+probSwitchMarkets to higher profit market at restart is 0.200000 
+probRandomSwitchMarkets at restart is 0.000000 
+Variable name: 0 not recognized. No value set.
+1
+1
+1
+1
+1
+0
+0
+0number of products with integer constraints is 0 
+number of products with complements at start of simulation is 0 
+The numbers of firms of types 1 and 2 are 5 and 5 
+at start of simulation, firm 5 has markup 2.000000 
+at start of simulation, firm 5 has price 2.000000 
+at start of simulation, firm 5 has wage 1.000000 
+
+0
+0
+11
+Number of rounds is 5000
+number of firms is 10 
+size of firm is 1800 B; size of population is 0.018000 MB 
+intensity of choics is 0.500000 
+weightRandDDC is 0.500000 
+endConsumerSearch is 200000 
+probRandDInvestMutation is 0.010000 
+probSwitchMarkets to higher profit market at restart is 0.200000 
+probRandomSwitchMarkets at restart is 0.000000 
+number of products with integer constraints is 0 
+number of products with complements at start of simulation is 0 
+The numbers of firms of types 1 and 2 are 5 and 5 
+at start of simulation, firm 5 has markup 2.000000 
+at start of simulation, firm 5 has price 2.000000 
+at start of simulation, firm 5 has wage 1.000000 
+initial utility for production workers in round 1 is 0.052001 
+initial utility for production workers in round 1 is 0.066556 
+initial utility for overhead workers in round 1 is 0.045854 
+initial utility for overhead workers in round 1 is 0.070210 
+initial utility for overhead workers in round 1 is 0.054183 
+initial utility for overhead workers in round 1 is 0.061547 
+Variable name: 0Variable name: 0 not recognized. No value set.
+1 not recognized. No value set.
+
+1
+1
+11
+1
+
+11
+1
+
+1
+0
+00
+
+00
+0
+0
+
+11
+0
+0
+0
+1Number of rounds is 5000
+number of firms is 10 
+1
+size of firm is 1800 B; size of population is 0.018000 MB 
+intensity of choics is 0.500000 
+Number of rounds is 5000
+number of firms is 10 
+size of firm is 1800 B; size of population is 0.018000 MB 
+intensity of choics is 0.500000 
+weightRandDDC is 0.500000 
+endConsumerSearch is 200000 
+probRandDInvestMutation is 0.010000 
+probSwitchMarkets to higher profit market at restart is 0.200000 
+probRandomSwitchMarkets at restart is 0.000000 
+number of products with integer constraints is 0 
+weightRandDDC is 0.500000 
+number of products with complements at start of simulation is 0 
+endConsumerSearch is 200000 
+probRandDInvestMutation is 0.010000 
+probSwitchMarkets to higher profit market at restart is 0.200000 
+The numbers of firms of types 1 and 2 are 5 and 5 
+probRandomSwitchMarkets at restart is 0.000000 
+at start of simulation, firm 5 has markup 2.000000 
+at start of simulation, firm 5 has price 2.000000 
+at start of simulation, firm 5 has wage 1.000000 
+number of products with integer constraints is 0 
+number of products with complements at start of simulation is 0 
+initial utility for production workers in round 1 is 0.057444 
+The numbers of firms of types 1 and 2 are 5 and 5 
+at start of simulation, firm 5 has markup 2.000000 
+at start of simulation, firm 5 has price 2.000000 
+at start of simulation, firm 5 has wage 1.000000 
+initial utility for production workers in round 1 is 0.079833 
+initial utility for overhead workers in round 1 is 0.039668 
+initial utility for overhead workers in round 1 is 0.057020 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.130602 and -0.188302 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.122650 and 0.029288 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.021356 and -0.020487 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.056127 and -0.039347 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.033334 and -0.089495 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.101851 and -0.053470 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.126266 and -0.153491 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.151430 and -0.165338 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.186938 and -0.184186 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.004104 and -0.016630 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.250171 and -0.167194 
+ Completed round 1000
+average recent profit below and above median recnt R&D activity in round 1000 are 0.082978 and -0.170190 
+total output and R&D are 10.353585 and 2 
+total employment of production labor and OH labor are 10.396686 and 10.400000 
+total wageBill and salaryBill are 10.396686 and 10.400000 
+total Utility of PL and OHL are 0.443062 and 0.501089 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.225865 and -0.164485 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.053073 and 0.020487 
+ Completed round 1000
+average recent profit below and above median recnt R&D activity in round 1000 are 0.006048 and -0.127070 
+total output and R&D are 10.048281 and 2 
+total employment of production labor and OH labor are 10.182208 and 10.400000 
+total wageBill and salaryBill are 10.182208 and 10.400000 
+total Utility of PL and OHL are 0.441140 and 0.407236 
+Completed round 1000
+average recent profit below and above median recnt R&D activity in round 1000 are 0.239134 and -0.645780 
+Completed round 1000
+average recent profit below and above median recnt R&D activity in round 1000 are 0.054908 and -0.180582 
+total output and R&D are 10.393278 and 3 
+total employment of production labor and OH labor are 10.599829 and 10.600000 
+total wageBill and salaryBill are 10.599829 and 10.600000 
+total Utility of PL and OHL are 0.603084 and 0.518039 
+total output and R&D are 10.451476 and 2 
+total employment of production labor and OH labor are 10.551476 and 10.400000 
+total wageBill and salaryBill are 10.551476 and 10.400000 
+total Utility of PL and OHL are 0.530001 and 0.448551 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.027551 and -0.038503 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.075880 and -0.017885 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.000044 and -0.001055 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.115817 and -0.056115 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.015446 and -0.012468 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.032076 and -0.013247 
+ Completed round 1000
+average recent profit below and above median recnt R&D activity in round 1000 are -0.039274 and 0.032275 
+total output and R&D are 10.932970 and 5 
+total employment of production labor and OH labor are 10.948746 and 11.000000 
+total wageBill and salaryBill are 10.948746 and 11.000000 
+total Utility of PL and OHL are 0.544430 and 0.386619 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.018282 and -0.124845 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.006295 and -0.026197 
+ Completed round 1000
+average recent profit below and above median recnt R&D activity in round 1000 are -0.169368 and 0.046004 
+total output and R&D are 11.796972 and 9 
+total employment of production labor and OH labor are 11.796972 and 11.800000 
+total wageBill and salaryBill are 11.796972 and 11.800000 
+total Utility of PL and OHL are 0.713364 and 0.442157 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.014166 and -0.004521 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.144790 and -0.019272 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.244982 and -0.163460 
+ Completed round 2000
+average recent profit below and above median recnt R&D activity in round 2000 are 0.047637 and -0.479242 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.013397 and -0.046113 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.178417 and -0.157210 
+ Completed round 2000
+average recent profit below and above median recnt R&D activity in round 2000 are -0.005863 and -0.051981 
+Completed round 2000
+average recent profit below and above median recnt R&D activity in round 2000 are -0.126836 and 0.048668 
+Completed round 1000
+average recent profit below and above median recnt R&D activity in round 1000 are -0.026629 and 0.031429 
+total output and R&D are 10.402690 and 2 
+total employment of production labor and OH labor are 10.405380 and 10.400000 
+total wageBill and salaryBill are 10.405380 and 10.400000 
+total Utility of PL and OHL are 0.468586 and 0.441396 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.499647 and 0.243043 
+ Completed round 2000
+average recent profit below and above median recnt R&D activity in round 2000 are -0.318670 and 0.429690 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.203914 and 0.246021 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.292118 and 0.166448 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.294127 and -0.219689 
+ Completed round 2000
+average recent profit below and above median recnt R&D activity in round 2000 are -0.057015 and 0.071444 
+Completed round 2000
+average recent profit below and above median recnt R&D activity in round 2000 are 0.045782 and -0.187595 
+Completed round 3000
+average recent profit below and above median recnt R&D activity in round 3000 are 0.030705 and -0.062979 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.454585 and 0.180311 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.156996 and -0.087334 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.430038 and 0.242832 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.026706 and -0.056643 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.495648 and 0.260553 
+ Completed round 3000
+average recent profit below and above median recnt R&D activity in round 3000 are -0.784108 and 0.163983 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.430560 and 0.223784 
+ Completed round 3000
+average recent profit below and above median recnt R&D activity in round 3000 are 0.164566 and -0.188630 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.000267 and -0.037429 
+ Completed round 2000
+average recent profit below and above median recnt R&D activity in round 2000 are 0.146709 and -0.349708 
+Completed round 3000
+average recent profit below and above median recnt R&D activity in round 3000 are 0.130096 and -0.211247 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.370226 and 0.064219 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.342224 and 0.150658 
+ Completed round 3000
+average recent profit below and above median recnt R&D activity in round 3000 are -0.702600 and 0.132729 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.367807 and 0.220541 
+ Completed round 4000
+average recent profit below and above median recnt R&D activity in round 4000 are 0.512826 and -0.796880 
+Completed round 4000
+average recent profit below and above median recnt R&D activity in round 4000 are -0.203851 and 0.168557 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.223081 and -0.102628 
+ Completed round 3000
+average recent profit below and above median recnt R&D activity in round 3000 are -0.440444 and 0.176408 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.413069 and 0.215381 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.328760 and 0.204719 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.413438 and 0.125056 
+ Completed round 4000
+average recent profit below and above median recnt R&D activity in round 4000 are -0.044264 and -0.243643 
+Completed round 4000
+average recent profit below and above median recnt R&D activity in round 4000 are -0.176471 and 0.140772 
+Completed round 5000
+mean of Yc is 10.706358 
+volatility of Yc is 3.156564 
+final utility of prodution and overhead workers are 1.583608 and 2.724886 
+final numbers of firms in markets 1 and 2 are 3 and 7 
+ Done Running Simulation. 
+Processor 7 Simulation took 0.483333 minutes. 
+sh: PAUSE: command not found
+COUNT: 6
+COUNT: 7
+Variable name: 0 not recognized. No value set.
+1
+1
+1
+1
+1
+0
+0
+0
+0
+0
+11
+Number of rounds is 5000
+number of firms is 10 
+size of firm is 1800 B; size of population is 0.018000 MB 
+intensity of choics is 0.500000 
+weightRandDDC is 0.500000 
+endConsumerSearch is 200000 
+probRandDInvestMutation is 0.010000 
+probSwitchMarkets to higher profit market at restart is 0.200000 
+probRandomSwitchMarkets at restart is 0.000000 
+number of products with integer constraints is 0 
+number of products with complements at start of simulation is 0 
+The numbers of firms of types 1 and 2 are 5 and 5 
+at start of simulation, firm 5 has markup 2.000000 
+at start of simulation, firm 5 has price 2.000000 
+at start of simulation, firm 5 has wage 1.000000 
+initial utility for production workers in round 1 is 0.032218 
+initial utility for overhead workers in round 1 is 0.054183 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.007142 and -0.013866 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.201855 and 0.064547 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.011207 and -0.092500 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.256531 and -0.245630 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.321495 and 0.132985 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.306926 and 0.187836 
+ Completed round 3000
+average recent profit below and above median recnt R&D activity in round 3000 are -0.140095 and 0.180505 
+Completed round 4000
+average recent profit below and above median recnt R&D activity in round 4000 are 0.307328 and -0.475830 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.243145 and -0.130244 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.196641 and -0.157082 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.248580 and -0.182484 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.177191 and -0.167696 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.107177 and -0.104889 
+ Completed round 4000
+average recent profit below and above median recnt R&D activity in round 4000 are -0.048690 and -0.082183 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.331027 and 0.206616 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.257168 and -0.203001 
+ Completed round 5000
+mean of Yc is 10.736487 
+volatility of Yc is 2.937260 
+final utility of prodution and overhead workers are 1.853113 and 3.491994 
+final numbers of firms in markets 1 and 2 are 4 and 6 
+ Done Running Simulation. 
+Processor 5 Simulation took 0.600000 minutes. 
+sh: PAUSE: command not found
+COUNT: 6
+COUNT: 7
+Variable name: 0 not recognized. No value set.
+1
+1
+1
+1
+1
+0
+0
+0
+0
+0
+11
+Number of rounds is 5000
+number of firms is 10 
+size of firm is 1800 B; size of population is 0.018000 MB 
+intensity of choics is 0.500000 
+weightRandDDC is 0.500000 
+endConsumerSearch is 200000 
+probRandDInvestMutation is 0.010000 
+probSwitchMarkets to higher profit market at restart is 0.200000 
+probRandomSwitchMarkets at restart is 0.000000 
+number of products with integer constraints is 0 
+number of products with complements at start of simulation is 0 
+The numbers of firms of types 1 and 2 are 5 and 5 
+at start of simulation, firm 5 has markup 2.000000 
+at start of simulation, firm 5 has price 2.000000 
+at start of simulation, firm 5 has wage 1.000000 
+initial utility for production workers in round 1 is 0.066556 
+initial utility for overhead workers in round 1 is 0.042295 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.245785 and -0.201650 
+ Completed round 1000
+average recent profit below and above median recnt R&D activity in round 1000 are 0.072588 and -0.181811 
+total output and R&D are 10.262454 and 1 
+total employment of production labor and OH labor are 10.324908 and 10.200000 
+total wageBill and salaryBill are 10.324908 and 10.200000 
+total Utility of PL and OHL are 0.454627 and 0.345787 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.224951 and -0.192910 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.005923 and -0.018038 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.057674 and -0.046495 
+ Completed round 5000
+mean of Yc is 10.715922 
+volatility of Yc is 2.819100 
+final utility of prodution and overhead workers are 1.430400 and 2.695784 
+final numbers of firms in markets 1 and 2 are 3 and 7 
+ Done Running Simulation. 
+Processor 2 Simulation took 0.616667 minutes. 
+sh: PAUSE: command not found
+COUNT: 6
+COUNT: 7
+Variable name: 0 not recognized. No value set.
+1
+1
+1
+1
+1
+0
+0
+0
+0
+0
+11
+Number of rounds is 5000
+number of firms is 10 
+size of firm is 1800 B; size of population is 0.018000 MB 
+intensity of choics is 0.500000 
+weightRandDDC is 0.500000 
+endConsumerSearch is 200000 
+probRandDInvestMutation is 0.010000 
+probSwitchMarkets to higher profit market at restart is 0.200000 
+probRandomSwitchMarkets at restart is 0.000000 
+number of products with integer constraints is 0 
+number of products with complements at start of simulation is 0 
+The numbers of firms of types 1 and 2 are 5 and 5 
+at start of simulation, firm 5 has markup 2.000000 
+at start of simulation, firm 5 has price 2.000000 
+at start of simulation, firm 5 has wage 1.000000 
+initial utility for production workers in round 1 is 0.067787 
+initial utility for overhead workers in round 1 is 0.052383 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.218364 and -0.269702 
+ Completed round 5000
+mean of Yc is 10.820167 
+volatility of Yc is 2.785536 
+final utility of prodution and overhead workers are 1.493679 and 2.504732 
+final numbers of firms in markets 1 and 2 are 4 and 6 
+ Done Running Simulation. 
+Processor 4 Simulation took 0.633333 minutes. 
+sh: PAUSE: command not found
+COUNT: 6
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.376698 and 0.160925 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.194009 and -0.160898 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.062205 and 0.055784 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.260735 and -0.187808 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.050139 and -0.019521 
+ Completed round 4000
+average recent profit below and above median recnt R&D activity in round 4000 are 0.048685 and -0.455608 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.236401 and -0.163421 
+ Completed round 5000
+mean of Yc is 10.646497 
+volatility of Yc is 2.766125 
+final utility of prodution and overhead workers are 1.011172 and 2.323854 
+final numbers of firms in markets 1 and 2 are 3 and 7 
+ Done Running Simulation. 
+Processor 1 Simulation took 0.650000 minutes. 
+sh: PAUSE: command not found
+COUNT: 5
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.130180 and -0.123137 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.247351 and -0.158778 
+ Completed round 5000
+mean of Yc is 10.590133 
+volatility of Yc is 2.822441 
+final utility of prodution and overhead workers are 1.151610 and 2.166347 
+final numbers of firms in markets 1 and 2 are 4 and 6 
+ Done Running Simulation. 
+Processor 6 Simulation took 0.666667 minutes. 
+sh: PAUSE: command not found
+COUNT: 4
+Completed round 2000
+average recent profit below and above median recnt R&D activity in round 2000 are 0.031365 and -0.073589 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.754028 and 0.670787 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.726847 and 0.642595 
+ Completed round 1000
+average recent profit below and above median recnt R&D activity in round 1000 are 0.053896 and -0.143908 
+total output and R&D are 10.225091 and 1 
+total employment of production labor and OH labor are 10.250182 and 10.200000 
+total wageBill and salaryBill are 10.250182 and 10.200000 
+total Utility of PL and OHL are 0.678307 and 0.422207 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.201385 and -0.166462 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.248618 and -0.172244 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.421720 and 0.242639 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.246179 and -0.180551 
+ Completed round 1000
+average recent profit below and above median recnt R&D activity in round 1000 are -0.082345 and 0.178173 
+total output and R&D are 10.399683 and 2 
+total employment of production labor and OH labor are 10.399683 and 10.400000 
+total wageBill and salaryBill are 10.399683 and 10.400000 
+total Utility of PL and OHL are 0.436452 and 0.467083 
+Completed round 5000
+mean of Yc is 10.594140 
+volatility of Yc is 2.841571 
+final utility of prodution and overhead workers are 1.159726 and 3.161481 
+final numbers of firms in markets 1 and 2 are 3 and 7 
+ Done Running Simulation. 
+Processor 3 Simulation took 0.733333 minutes. 
+sh: PAUSE: command not found
+COUNT: 3
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.164614 and -0.147035 
+ Completed round 3000
+average recent profit below and above median recnt R&D activity in round 3000 are -0.369260 and 0.207250 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.498701 and 0.143215 
+ Completed round 2000
+average recent profit below and above median recnt R&D activity in round 2000 are 0.009838 and -0.120249 
+Completed round 2000
+average recent profit below and above median recnt R&D activity in round 2000 are -0.105343 and 0.057106 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.666325 and 0.595569 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.804348 and 0.630195 
+ Completed round 4000
+average recent profit below and above median recnt R&D activity in round 4000 are 0.217823 and -0.270367 
+Completed round 3000
+average recent profit below and above median recnt R&D activity in round 3000 are 0.124764 and -0.304859 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.226407 and -0.141403 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.042234 and -0.117251 
+ Completed round 3000
+average recent profit below and above median recnt R&D activity in round 3000 are -0.004796 and 0.018790 
+Completed round 5000
+mean of Yc is 10.729199 
+volatility of Yc is 2.905808 
+final utility of prodution and overhead workers are 1.005501 and 2.251929 
+final numbers of firms in markets 1 and 2 are 3 and 7 
+ Done Running Simulation. 
+Processor 7 Simulation took 0.450000 minutes. 
+sh: PAUSE: command not found
+COUNT: 2
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are 0.000814 and -0.020052 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.287369 and 0.160667 
+ firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.339645 and 0.200365 
+ Completed round 4000
+average recent profit below and above median recnt R&D activity in round 4000 are 0.182546 and -0.304494 
+firm 6 has restarted 
+avgRecentProfitType1 and avgRecentProfitType2 are -0.314525 and 0.206741 
+ Completed round 4000
+average recent profit below and above median recnt R&D activity in round 4000 are -0.123361 and 0.028758 
+Completed round 5000
+mean of Yc is 10.637562 
+volatility of Yc is 2.759835 
+final utility of prodution and overhead workers are 1.147570 and 2.641031 
+final numbers of firms in markets 1 and 2 are 4 and 6 
+ Done Running Simulation. 
+Processor 5 Simulation took 0.433333 minutes. 
+sh: PAUSE: command not found
+COUNT: 1
+Completed round 5000
+mean of Yc is 10.726672 
+volatility of Yc is 3.029543 
+final utility of prodution and overhead workers are 1.314883 and 2.774230 
+final numbers of firms in markets 1 and 2 are 3 and 7 
+ Done Running Simulation. 
+Processor 2 Simulation took 0.450000 minutes. 
+sh: PAUSE: command not found
+kill all processors
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 0): finalize
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=finalize_ack
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 20): finalize
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=finalize_ack
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 29): finalize
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=finalize_ack
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 6): finalize
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=finalize_ack
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 8): finalize
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=finalize_ack
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 23): finalize
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=finalize_ack
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 26): finalize
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=finalize_ack
+[proxy:0:0@una0017.hpc.hamilton.edu] got pmi command (from 16): finalize
+
+[proxy:0:0@una0017.hpc.hamilton.edu] PMI response: cmd=finalize_ack

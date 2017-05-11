@@ -1,4 +1,4 @@
-firmNum  5
+firmNum  10
 rounds  5000
 randSeedStart 1
 randSeedEnd 10
