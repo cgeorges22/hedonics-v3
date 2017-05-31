@@ -45,3 +45,15 @@ $ qsub queue_sim                      // add the program to the hpc queue
 $ showq                               // get information about the queue
 $ qstat                               // ditto
 
+// ADDING DATA OUTPUTS
+
+// In simulation_helper.cpp, increase dataNum if needed. Currently, there are 5 data files 
+// being created but only data4 and data5 are being used. 
+
+// In master_slave_hedonics.h, use the following code when you want to output
+// Let X be the data file number for for data1, x=1
+
+// use function to_string() to convert any type to a string
+string dataX_to_output = (string_to_output);    
+MPI_Status io_status;
+MPI_File_write_shared(file[X-1], dataX_to_output.c_str(), dataX_to_output.size(), MPI_CHAR, &io_status);
