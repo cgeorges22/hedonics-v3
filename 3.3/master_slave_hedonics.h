@@ -498,12 +498,13 @@ int simulation(int randSeed, int rank, MPI_File * file, double paramValue) {
     */
     
     //output last round firm dist of hedonic quality vectors and final demand shares (for first randSeed only) (and after restarts)
-    if(randSeed == randSeedStart){
+    //if(randSeed == randSeedStart){
       if(debugging){printf("output4 for last round \n");} //8/2/09
+	
+      // output using MPI librarys KF 5/10/17		
+      string data4_to_output = to_string(randSeed) + to_string(firmNum);	
       for(i = 0; i < firmNum; i++) {
 
-		// output using MPI librarys KF 5/10/17		
-                string data4_to_output = "";
 		for(j = 0; j < numHedonicElements; j++) {
 			//output4 << (firms[i]).getHedonicQualityElementJ(j) << " ";
 			data4_to_output += to_string((firms[i]).getHedonicQualityElementJ(j)) + " ";
