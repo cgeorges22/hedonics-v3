@@ -2132,10 +2132,7 @@ int calcMedian(int input[], int length)
         k = length / 2 + 1;
 
         // lower median for even length
-        if (length % 2 == 0) k--;
-
-        cout << "size: " << length << endl;
-        cout << "k: " << k << endl;
+        //if (length % 2 == 0) k--;
 
         return calcMedianHelper(input, start, end, k);
 }
