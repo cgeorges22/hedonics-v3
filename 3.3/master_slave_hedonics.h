@@ -511,14 +511,16 @@ int simulation(int randSeed, int rank, MPI_File * file, double paramValue) {
 		}
 
 		data4_to_output += "  " + to_string((firms[i]).getFinalDemandShare()) + " " + to_string((firms[i]).getType()) + "\n"; 
-		MPI_Status io_status;
-                MPI_File_write_shared(file[3], data4_to_output.c_str(), data4_to_output.size(), MPI_CHAR, &io_status);
+	}
+	
+	MPI_Status io_status;
+        MPI_File_write_shared(file[3], data4_to_output.c_str(), data4_to_output.size(), MPI_CHAR, &io_status);
 
 	//	output4 << "  " << (firms[i]).getFinalDemandShare() << "\n";
 	//	output4 << " " << (firms[i]).getType() << "\n"; //5/18/16
 	//printf("at end of simulation, firm %d has innovation status %d \n",i+1,firms[i].getRandDInvestment());//3/24/10 testing
-      }
-    }
+      
+    //}
     
     //print end of simulation Yc stats, and demand share for first firm with complements
     if(qqq < firmNum) {printf("at end of simulation, firm %d's final demand share is %f \n", qqq,firms[qqq].getFinalDemandShare());}
