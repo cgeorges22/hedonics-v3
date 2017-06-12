@@ -2085,4 +2085,57 @@ int doRestartsHedonicsEndogN1N2(firm firms[], const int firmNum, int &firmNum1, 
     return rndrestrt;
 }
 
+// KF median functions
+int partition(int* input, int p, int r) {
+    int pivot = input[r];
 
+    while ( p < r ) {
+        while ( input[p] < pivot )
+            p++;
+
+        while ( input[r] > pivot )
+            r--;
+
+        if ( input[p] == input[r] )
+            p++;
+        else if ( p < r ) {
+            int tmp = input[p];
+            input[p] = input[r];
+            input[r] = tmp;
+        }
+    }
+
+    return r;
+}
+
+int calcMedianHelper(int input[], int start, int end, int k){
+
+        int j, length;
+
+        if (start == end) return input[start];
+
+        j = partition(input, start, end);
+        length = j - start + 1;
+
+        if (length == k) return input[j];
+        else if (k < length) return calcMedianHelper(input, start, j-1, k);
+        else return calcMedianHelper(input, j+1, end, k-length);
+}
+
+int calcMedian(int input[], int length)
+{
+
+        int start, end, k;
+
+        start = 0;
+        end = length - 1;
+        k = length / 2 + 1;
+
+        // lower median for even length
+        if (length % 2 == 0) k--;
+
+        cout << "size: " << length << endl;
+        cout << "k: " << k << endl;
+
+        return calcMedianHelper(input, start, end, k);
+}
