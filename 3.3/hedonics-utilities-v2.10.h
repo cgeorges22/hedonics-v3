@@ -75,6 +75,7 @@ int doRestartsHedonicsEndogN1N2(firm firms[], const int firmNum, int &firmNum1, 
 //restarts -- common shock case -- needs to be redone if used ***
 int doRestartsCommonShock(firm firms[], const int firmNum, double strtTech, double wageBill, double overHeadGReq, double intPriceDiscount, bool imitation, double probRandomRestart, double wage, double salary, double markup); 
 
+//median functions - KF
 int partition(int* input, int p, int r); 
 int calcMedianHelper(int input[], int start, int end, int k);
 int calcMedian(int input[], int length);
